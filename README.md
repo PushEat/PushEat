@@ -23,7 +23,8 @@ https://github.com/carlesm/minidjangoapp/blob/master/deploymentfiles/heroku.md
 ![alt text](media/DatabaseDiagram.png)
 
 
-##Superuser Credentials
+## Superuser Credentials
 
-   user: root
-   password: 123password
+      user: root
+      
+      password: 123password
