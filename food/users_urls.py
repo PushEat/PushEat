@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from food.auth_views import *
-from food.register_views import UserRegister
+from food.register_views import register
 from views import *
 
 urlpatterns = [
@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^logout/$', logout, name="logout"),
     url(r'^loggedin/$', loggedin, name="loggedin"),
     url(r'^invalid/$', invalid_login, name="invalid_login"),
-    url(r'^register/$', UserRegister.as_view(), name="user_register"),
+    url(r'^register/', register, name="user_register"),
 ]

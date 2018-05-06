@@ -1,9 +1,26 @@
 {% extends "base/leftBar.html" %} {% load staticfiles %}
 
 {% block header %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+
+<div class="w3-row ">
+    <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col w3-center" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+        <div class="w3-rest" style="width: 30%; margin-bottom:20px">
+            <h1><b>Sign Up</b></h1>
+            <h5 class="w3-text-gray"><b>Introduce your information</b></h5>
+            <hr style="width:50px;border:5px solid black" class="w3-round">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <a href="../base/leftBar.html" class="w3-button w3-green w3-round-large w3-padding">
+                <i class="fa fa-user-plus w3-padding" aria-hidden="true""></i>Create your account</a>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
