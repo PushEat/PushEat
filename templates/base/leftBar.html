@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>PushEat</title>
+<title>{% block title %} PushEat {% endblock %}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 <body>
 <!-- Sidebar/menu -->
+{% block navbar %}
 <nav class="w3-sidebar w3-card w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;background-color: #e6e6e6; color: #00000F"id="mySidebar"><br>
 <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
 <div class="w3-container">
@@ -26,6 +27,7 @@
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 </nav>
+{% endblock %}
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-xlarge w3-padding" style="background-color: #e6e6e6">
 <a href="javascript:void(0)" class="w3-button w3-light-grey w3-margin-right" onclick="w3_open()">☰</a>
@@ -36,17 +38,20 @@
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
+{% block content %}
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
-
+{% endblock %}
 <!-- Header -->
+{% block header %}
 <div class="w3-container" style="margin-top:80px" id="showcase">
     <h1 class="w3-jumbo"><b>Push Eat</b></h1>
     <h3 class="w3-xxlarge w3-text-gray"><b>Let's take some food!</b></h3>
     <hr style="width:50px;border:5px solid black" class="w3-round">
 </div>
+{% endblock %}
 
 {# SCRIPTS #}
-
+{% block scripts %}
 <script>
 // Script to open and close sidebar
 function w3_open() {
@@ -67,6 +72,6 @@ var captionText = document.getElementById("caption");
 captionText.innerHTML = element.alt;
 }
 </script>
-
+{% endblock %}
 </body>
 </html>
