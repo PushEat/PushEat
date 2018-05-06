@@ -64,8 +64,8 @@
                         <p class="error">Sorry that's not a valid username or password</p>
                     {% endif %}
                     <form class="login-form" action="/users/auth/" method="POST"> {% csrf_token %}
-                      <div class="w3-display-middle w3-center w3-col" style="background-color: lightgrey; width: 250px; margin-top: -100px; border-radius: 10px">
-                          <label class="w3-text-gray" for="user" ><i class="fa fa-user" style="margin-top: 20px"></i> Username</label>
+                      <div class="w3-center w3-col" style="margin-left: 20%; margin-top: 5%; background-color: lightgrey; width: 250px; border-radius: 10px">
+                          <label class="w3-text-gray" for="user" ><i class="fa fa-user" style="margin-top: 20%"></i> Username</label>
                           <input style="margin-top: 5px" type="text" id="username" name="username" placeholder="username" required/>
                           <br>
                           <br>
