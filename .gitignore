@@ -65,6 +65,8 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+#Pre-compiled files
+*.pyc
 
 #DB
 *.sqlite3
