@@ -25,6 +25,9 @@ def profile_view(request):
 def login_page(request):
     return HttpResponseRedirect("/user/profile")
 
+def popular_users(request):
+    return render(request, 'popular_users.html')
+
 
 def get_member(user):
     if Subscribed.objects.filter(user=user).exists():
