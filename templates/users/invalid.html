@@ -1,49 +1,6 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href='{% static "/css/style.css" %}'>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% extends "base/leftBar.html" %} {% load staticfiles %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>PushEat Login</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
-    crossorigin="anonymous">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-    <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-card w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;background-color: #e6e6e6; color: #00000F"id="mySidebar"><br>
-        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-        <div class="w3-container">
-            <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
-        </div>
-        <div class="w3-bar-block">
-            <a href="/" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fa fa-home"></i> Home</a>
-            <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fa fa-bullhorn"></i> Last Auctions</a>
-            <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-users"></i> Popular Users</a>
-            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-user-plus"></i> SingUp</a>
-            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-sign-in-alt"></i> SingIn</a>
-            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-envelope"></i> Contact</a>
-        </div>
-    </nav>
-
-    <!-- Top menu on small screens -->
-    <header class="w3-container w3-top w3-hide-large w3-xlarge w3-padding" style="background-color: #e6e6e6">
-        <a href="javascript:void(0)" class="w3-button w3-light-grey w3-margin-right" onclick="w3_open()">☰</a>
-        <span>PushEat</span>
-    </header>
-
-    <!-- Overlay effect when opening sidebar on small screens -->
-    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left:340px;margin-right:40px"/>
-
+{% block header %}
     <!-- Header -->
     <div class="w3-container" style="margin-top:80px" id="showcase">
         <div class="w3-row">
@@ -62,30 +19,4 @@
 
 
     </div>
-
-    {# SCRIPTS #}
-
-    <script>
-    // Script to open and close sidebar
-    function w3_open() {
-      document.getElementById("mySidebar").style.display = "block";
-      document.getElementById("myOverlay").style.display = "block";
-    }
-
-    function w3_close() {
-      document.getElementById("mySidebar").style.display = "none";
-      document.getElementById("myOverlay").style.display = "none";
-    }
-
-    // Modal Image Gallery
-    function onClick(element) {
-    document.getElementById("img01").src = element.src;
-    document.getElementById("modal01").style.display = "block";
-    var captionText = document.getElementById("caption");
-    captionText.innerHTML = element.alt;
-    }
-    </script>
-
-</body>
-
-</html>
+{% endblock %}
