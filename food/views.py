@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from food.models import *
-
+from django.views.generic import ListView
 
 # Security Mixins
 class LoginRequiredMixinStaff(object):
@@ -28,9 +28,12 @@ def login_page(request):
 def popular_users(request):
     return render(request, 'popular_users.html')
 
-
 def get_member(user):
     if Subscribed.objects.filter(user=user).exists():
         return Subscribed.objects.get(user=user)
 
     return None
+
+class popularUsersView(ListView):
+    model = Subscribed
+    template_name = 'popular_users.html'
