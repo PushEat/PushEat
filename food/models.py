@@ -19,6 +19,12 @@ class Subscribed(models.Model):
     postal_code = models.PositiveIntegerField()
     subscription_date = models.DateField(default=date.today)
 
+    def __str__(self):
+        return u"%s" % self.first_name
+
+    def __unicode__(self):
+        return u"%s" % self.first_name
+
 
 class Food(models.Model):
     type = models.CharField(blank=False, max_length=32)
