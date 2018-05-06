@@ -1,1 +1,9 @@
 {% extends "base/leftBar.html" %} {% load staticfiles %}
+
+{% block header %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% endblock %}
