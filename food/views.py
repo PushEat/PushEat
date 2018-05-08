@@ -38,3 +38,7 @@ class popularUsersView(ListView):
     model = Subscribed
     template_name = 'popular_users.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(popularUsersView, self).get_context_data(**kwargs)
+        context['popularusers'] = Subscribed.objects.all().order_by('-pk')
+        return context
