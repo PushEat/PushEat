@@ -37,3 +37,4 @@ def get_member(user):
 class popularUsersView(ListView):
     model = Subscribed
     template_name = 'popular_users.html'
+
