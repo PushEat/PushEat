@@ -10,13 +10,13 @@
             </div>
             <div class="w3-rest">
                 <h1><b> Popular Users </b></h1>
-                <h5 class="w3-text-gray"><b> Introduce your credentials </b></h5>
+                <h5 class="w3-text-gray"><b> The most popular users in PushEat. </b></h5>
                 <hr style="width:50px;border:5px solid black" class="w3-round">
             </div>
         </div>
     </div>
      {% for user in popularusers %}
-            <div class="w3-col l2 m4 w3-margin">
+            <div class="w3-col 6 m4 w3-margin">
                 <div class="w3-card-4" style="border-radius: 4px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ user.first_name }}, {{ user.last_name }}</b></h3>
@@ -26,7 +26,7 @@
                         <h6 class="w3-text-dark-gray"><b> Address: {{ user.address }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Postal Code: {{ user.postal_code }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Subscribed since: {{ user.subscription_date }}€</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Valoration (points): {{ user.rate }}€</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Valoration (points): {{ user.rate }}</b></h6>
                     </div>
                 </div>
             </div>
