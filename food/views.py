@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
+from django.views.generic import ListView
 from food.models import *
 
 
@@ -31,3 +32,14 @@ def get_member(user):
         return Subscribed.objects.get(user=user)
 
     return None
+
+
+class AuctionsView(ListView):
+    model = FoodOffer
+    template_name = 'lastAuctions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AuctionsView, self).get_context_data(**kwargs)
+
+        context['auctions'] = FoodOffer.objects.all().order_by('-pk')
+        return context
