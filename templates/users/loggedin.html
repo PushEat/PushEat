@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>PushEat</title>
+<title>{% block profileTitle %} PushEat {% endblock %}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -15,9 +15,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <body class="w3-light-grey">
 
 <!-- Sidebar/menu -->
+{% block profileNavbar %}
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
     <div class="w3-container">
-        <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+        <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-padding w3-hover-grey" title="close menu">
             <i class="fa fa-remove"></i>
         </a>
         <img class="w3-padding w3-center" src="{% static 'img/user_icon.png' %}" alt="" style="width: 100px"><br>
@@ -43,17 +44,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
+{% endblock %}
 <!-- !PAGE CONTENT! -->
+{% block profileContent %}
 <div class="w3-main" style="margin-left:300px">
-
+{% endblock %}
     <!-- Header -->
+    {% block header %}
     <header id="portfolio">
-        <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+        <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
         <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
         <div class="w3-container">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75" style="margin-top: -10px">
+            </div>
             <h1><b>PushEat</b></h1>
-            <div class="w3-section w3-bottombar w3-padding-16">
+            <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
                 <span class="w3-margin-right">Filter:</span>
                 <button class="w3-button" style="background-color: lightgray"><i class="fas fa-utensils  w3-margin-right"></i>My bids</button>
                 <button class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</button>
@@ -61,12 +67,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             </div>
         </div>
     </header>
+    {% endblock %}
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
         <h2>Hi {{ full_name }} you are now logged in!</h2>
-        <p>Click <a href="/users/logout">here</a> to logout</p>
         <hr>
     </div>
+
 
 
     <div class="w3-center w3-padding-24" style="background-color: lightgray">Powered by <a href="https://github.com/PushEat/PushEat" title="W3.CSS" target="_blank" class="w3-hover-opacity">PushEat developers team <i class="fab fa-github"></i></a></div>
@@ -74,6 +81,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <!-- End page content -->
 </div>
 
+{% block scripts %}
 <script>
 // Script to open and close sidebar
 function w3_open() {
@@ -86,6 +94,7 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 </script>
+{% endblock %}
 
 </body>
 </html>
