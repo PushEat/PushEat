@@ -1,17 +1,19 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect, render
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
 
-from food.forms import RegisterForm
+from forms import SignUpForm
 
 
 def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('base/leftBar')
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return render(request, 'users/users_login.html')
     else:
-        form = RegisterForm()
-
-        args = {'form': form}
-        return render(request, 'users/user_register.html', args)
+        form = SignUpForm()
+    return render(request, 'users/user_register.html', {'form': form})

@@ -2,25 +2,26 @@
 
 {% block header %}
 
-<div class="w3-row ">
-    <div class="w3-container" style="margin-top:80px" id="showcase">
-        <div class="w3-row">
-            <div class="w3-col w3-center" style="width: 70px; margin-top: 20px">
-                <img src="{% static 'img/logo.png' %}" width="75">
-            </div>
-        <div class="w3-rest" style="width: 30%; margin-bottom:20px">
-            <h1><b>Sign Up</b></h1>
-            <h5 class="w3-text-gray"><b>Introduce your information</b></h5>
-            <hr style="width:50px;border:5px solid black" class="w3-round">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <a href="/" class="w3-button w3-green w3-round-large w3-padding">
-                <i class="fa fa-user-plus w3-padding" aria-hidden="true"></i>Create your account</a>
-            </form>
-        </div>
-        </div>
+ <h2>Sign up</h2>
+  <form method="post">
+    <div class="w3-center w3-col" style="margin-left: 20%; margin-top: 5%; background-color: lightgrey; width: 250px; border-radius: 10px">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+     <button class="w3-margin w3-button w3-hover-green" type="submit" style="margin-top: 20px; background-color: #8fd08d; border-radius: 10px">
+        <label class="w3-text-gray" for="user" ><i class="fas fa-user-plus"></i> Sign Up</label>
+    </button>
     </div>
-</div>
+  </form>
 
 {% endblock %}
