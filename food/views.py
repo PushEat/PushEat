@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from food.models import *
 from django.views.generic import ListView
 
@@ -42,6 +42,7 @@ class popularUsersView(ListView):
     def get_context_data(self, **kwargs):
         context = super(popularUsersView, self).get_context_data(**kwargs)
         context['popularusers'] = Subscribed.objects.all().order_by('-rate')[:4]
+        return context
 
 class AuctionsView(ListView):
     model = FoodOffer
@@ -52,3 +53,8 @@ class AuctionsView(ListView):
 
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
+
+
+class MyBidsView(CreateView):
+    model = Bid
+    fields = ['Amount']
