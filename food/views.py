@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from food.models import *
-
+from django.views.generic import ListView
 
 # Security Mixins
 class LoginRequiredMixinStaff(object):
@@ -26,6 +26,8 @@ def profile_view(request):
 def login_page(request):
     return HttpResponseRedirect("/user/profile")
 
+def popular_users(request):
+    return render(request, 'popular_users.html')
 
 def get_member(user):
     if Subscribed.objects.filter(user=user).exists():
@@ -33,6 +35,13 @@ def get_member(user):
 
     return None
 
+class popularUsersView(ListView):
+    model = Subscribed
+    template_name = 'popular_users.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(popularUsersView, self).get_context_data(**kwargs)
+        context['popularusers'] = Subscribed.objects.all().order_by('-rate')[:4]
 
 class AuctionsView(ListView):
     model = FoodOffer

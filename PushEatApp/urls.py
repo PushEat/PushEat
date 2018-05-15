@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='base/leftBar.html'), name='home'),
     url(r'^api/', food_view, name='food_view'),
     url(r'^users/', include('food.users_urls', namespace='users')),
+    url(r'^popular_users/', popularUsersView.as_view(), name='popular_users'),
     url(r'^last_auctions/', AuctionsView.as_view(), name='last_auctions'),
 ]
