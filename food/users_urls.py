@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^loggedin/$', loggedin, name="loggedin"),
     url(r'^invalid/$', invalid_login, name="invalid_login"),
     url(r'^register/', register, name="user_register"),
+    url(r'^add_auctions/', AddAuctions.as_view(), name='add_auctions'),
 ]

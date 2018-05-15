@@ -42,6 +42,7 @@ class popularUsersView(ListView):
     def get_context_data(self, **kwargs):
         context = super(popularUsersView, self).get_context_data(**kwargs)
         context['popularusers'] = Subscribed.objects.all().order_by('-rate')[:4]
+        return context
 
 class AuctionsView(ListView):
     model = FoodOffer
