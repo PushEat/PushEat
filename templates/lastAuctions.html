@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+{% extends "base/leftBar.html" %} {% load staticfiles %}
+
+{% block header %}
+
+    <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+            <div class="w3-rest">
+                <h1><b>Last Auctions</b></h1>
+                <h5 class="w3-text-gray"><b>Here you can see some of the lasts auctions.</b></h5>
+                <hr style="width:50px;border:5px solid black" class="w3-round">
+            </div>
+        </div>
+
+        {% for auction in auctions %}
+            <div class="w3-col 6 m4 w3-margin">
+                <div class="w3-card-4" style="border-radius: 4px">
+                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
+                    </header>
+                    <div class="w3-container w3-white" style="border-radius: 4px">
+                        <h6 class="w3-text-dark-gray"><b> Food: {{ auction.food.name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Auctioneer: {{ auction.owner.first_name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Initial Price: {{ auction.start_price }}€</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Actual Price: {{ auction.actual_price }}€</b></h6>
+                        <button class="w3-right" onclick="document.getElementById('id01').style.display='block'">Push <i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    <!-- Button to open the modal login form -->
+
+
+    <!-- The Modal -->
+    <div id="id01" class="modal" style="z-index: 100">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="/users/auth/" method="POST"> {% csrf_token %}
+        <div class="imgcontainer">
+          <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
+        </div>
+
+        <div class="container">
+            <label for="uname"><i class="fa fa-user"></i><b> Username</b></label>
+          <input type="text" placeholder="Enter Username" id="username" name="username" required style="width: 100%">
+            <br>
+          <label for="psw"><i class="fa fa-key"></i><b> Password</b></label>
+          <input type="password" placeholder="Enter Password" id="password" name="password" required style="width: 100%">
+
+            <button class="myButton" type="submit">
+                Login <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="psw">Don't have an account? <a style="text-decoration: underline" href="#">Register</a></span>
+        </div>
+
+      </form>
+    </div>
+
+    </div>
+
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+
+{% endblock %}
+

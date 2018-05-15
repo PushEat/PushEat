@@ -34,22 +34,34 @@ class Food(models.Model):
     fats = models.PositiveIntegerField(blank=False)
     protein = models.PositiveIntegerField(blank=False)
 
+    def __str__(self):
+        return u"%s" % self.name
 
-class FoodOfer(models.Model):
+    def __unicode__(self):
+        return u"%s" % self.name
+
+
+class FoodOffer(models.Model):
     owner = models.ForeignKey(Subscribed, related_name='created_by')
     purchaser = models.ForeignKey(Subscribed, blank=True, null=True, related_name='bidded_by')
     food = models.ForeignKey(Food, related_name='contains')
 
-    start_price = models.PositiveIntegerField(blank=False)
-    actual_price = models.PositiveIntegerField(blank=False)
-    last_price = models.PositiveIntegerField(blank=False)
-    description = models.CharField(blank=False, max_length=64)
-    available_time = models.PositiveIntegerField(blank=False)
+    start_price = models.PositiveIntegerField(blank=False, null=False)
+    actual_price = models.PositiveIntegerField(blank=False, null=False)
+    last_price = models.PositiveIntegerField(blank=True, null=True)
+    description = models.CharField(blank=False, max_length=64, null=False)
+    available_time = models.PositiveIntegerField(blank=False, null=False)
+
+    def __str__(self):
+        return u"%s" % self.owner.first_name + ", " + self.food.name
+
+    def __unicode__(self):
+        return u"%s" % self.owner.first_name + ", " + self.food.name
 
 
 class Bid(models.Model):
     bidder = models.ForeignKey(Subscribed, related_name='made_by')
-    offer = models.ForeignKey(FoodOfer, related_name='done_on')
+    offer = models.ForeignKey(FoodOffer, related_name='done_on')
 
     amount = models.PositiveIntegerField(blank=False)
 
@@ -58,4 +70,4 @@ class Message(models.Model):
     send_by = models.ForeignKey(Subscribed, related_name='send_by')
     send_to = models.ForeignKey(Subscribed, related_name='send_to')
     body = models.CharField(blank=False, max_length=512)
-    date = models.DateField(default=date.today)
+    date = models.DateTimeField(default=date.today)
