@@ -4,7 +4,8 @@ from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
-from models import Subscribed
+from models import *
+from django.views.generic import ListView
 from os import system
 from views import get_member
 import string
@@ -37,3 +38,11 @@ def loggedin(request):
 
 def invalid_login(request):
     return render_to_response('users/invalid.html')
+
+class AddAuctions(ListView):
+    model = FoodOffer
+    template_name = 'users/add_auctions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AddAuctions, self).get_context_data(**kwargs)
+        return context
