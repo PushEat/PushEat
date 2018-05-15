@@ -1,0 +1,22 @@
+{% extends "base/leftBar.html" %} {% load staticfiles %}
+
+{% block header %}
+    <!-- Header -->
+    <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+            <div class="w3-rest">
+                <h1><b>Push Eat: Login Page</b></h1>
+                <h5 class="w3-text-gray"><b>Introduce your credentials</b></h5>
+                <hr style="width:50px;border:5px solid black" class="w3-round">
+            </div>
+        </div>
+
+        <h2>Your login details are invalid!</h2>
+        <p>Click <a href="/users/login">here</a> to login again.</p>
+
+
+    </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-"""pusheatdev URL Configuration
+"""untitled1 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.views.generic.base import TemplateView
+from django.conf.urls import url, include
 from django.contrib import admin
+from food.views import food_view, popular_users, popularUsersView
+from food.views import profile_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', TemplateView.as_view(template_name='base/leftBar.html'), name='home'),
+    url(r'^api/', food_view, name='food_view'),
+    url(r'^users/', include('food.users_urls', namespace='users')),
+    url(r'^popular_users/', popularUsersView.as_view(), name='popular_users'),
 ]

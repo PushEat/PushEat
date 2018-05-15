@@ -44,7 +44,7 @@ atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
 .idea/replstate.xml
-
+.idea/
 # Ruby plugin and RubyMine
 /.rakeTasks
 
@@ -65,5 +65,10 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+#Pre-compiled files
+*.pyc
+
+#DB
+*.sqlite3
 
 # End of https://www.gitignore.io/api/pycharm

@@ -1,0 +1,40 @@
+{% extends "base/leftBar.html" %} {% load staticfiles %}
+
+{% block header %}
+    <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+            <div class="w3-rest">
+                <h1><b>Push Eat: Login Page</b></h1>
+                <h5 class="w3-text-gray"><b>Introduce your credentials</b></h5>
+                <hr style="width:50px;border:5px solid black" class="w3-round">
+            </div>
+        </div>
+
+        <div class="login-page">
+            <div class="w3-row">
+                <div class="form">
+                    {% if form.errors %}
+                        <p class="error">Sorry that's not a valid username or password</p>
+                    {% endif %}
+                    <form class="login-form" action="/users/auth/" method="POST"> {% csrf_token %}
+                      <div class="w3-center w3-col" style="margin-left: 20%; margin-top: 5%; background-color: lightgrey; width: 250px; border-radius: 10px">
+                          <label class="w3-text-gray" for="user" ><i class="fa fa-user" style="margin-top: 20%"></i> Username</label>
+                          <input style="margin-top: 5px" type="text" id="username" name="username" placeholder="username" required/>
+                          <br>
+                          <br>
+                          <label class="w3-text-gray" for="pass"><i class="fa fa-key"></i> Password</label>
+                          <input style="margin-top: 5px" type="password" id="password" name="password" placeholder="password" required/>
+                          <button class="w3-margin w3-button" type="submit" style="margin-top: 20px; background-color: #8fd08d; border-radius: 10px">
+                              <label class="w3-text-gray" for="user" ><i class="fas fa-sign-in-alt"></i> Login</label>
+                          </button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

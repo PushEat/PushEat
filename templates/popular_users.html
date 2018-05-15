@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+{% extends 'base/leftBar.html' %} {% load staticfiles %}
+
+{% block header %}
+    <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+            <div class="w3-rest">
+                <h1><b> Popular Users </b></h1>
+                <h5 class="w3-text-gray"><b> PushEat’s Most Popular Users: The 4 Most-Followed Celebs. </b></h5>
+                <hr style="width:50px;border:5px solid black" class="w3-round">
+            </div>
+        </div>
+    </div>
+     {% for user in popularusers %}
+            <div class="w3-col 6 m4 w3-margin">
+                <div class="w3-card-4" style="border-radius: 4px">
+                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ user.first_name }}, {{ user.last_name }}</b></h3>
+                    </header>
+                    <div class="w3-container w3-white" style="border-radius: 4px">
+                        <h6 class="w3-text-dark-gray"><b> Age: {{ user.age }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Address: {{ user.address }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Postal Code: {{ user.postal_code }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Subscribed since: {{ user.subscription_date }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Valoration: {{ user.rate }} <i class="fa fa-star" style="color:yellow"></i> </b></h6>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

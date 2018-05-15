@@ -1,0 +1,10 @@
+body {
+    background: whitesmoke;
+}
+
+.h1 {
+    font-size: 18px;
+    text-decoration: underline;
+    color: #ba2121;
+    background-color: #79aec8;
+}

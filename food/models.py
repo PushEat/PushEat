@@ -18,6 +18,13 @@ class Subscribed(models.Model):
     # country = CountryField()
     postal_code = models.PositiveIntegerField()
     subscription_date = models.DateField(default=date.today)
+    rate = models.PositiveIntegerField(blank=False, null=False)
+
+    def __str__(self):
+        return u"%s" % self.first_name
+
+    def __unicode__(self):
+        return u"%s" % self.first_name
 
 
 class Food(models.Model):
