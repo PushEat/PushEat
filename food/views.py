@@ -53,3 +53,13 @@ class AuctionsView(ListView):
 
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
+
+
+class MyValorationView(ListView):
+    model = Subscribed
+    template_name = 'my_valoration.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MyValorationView, self).get_context_data(**kwargs)
+        context['myvaloration'] = Subscribed.objects.all().order_by('-rate')[:1]
+        return context
