@@ -2,3 +2,14 @@
 
 {% extends "users/loggedin.html" %} {% load staticfiles %}
 
+{% block body %}
+
+    <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+        <h5> Here you can see and create your auctions. </h5>
+        <hr>
+        {% for auction in auctions %}
+            <h6>{{ auction.food }}</h6>
+        {% endfor %}
+    </div>
+
+{% endblock %}

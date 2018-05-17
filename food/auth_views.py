@@ -45,4 +45,7 @@ class AddAuctions(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AddAuctions, self).get_context_data(**kwargs)
+
+        context['auctions'] = FoodOffer.objects.all().filter(owner=self.request.user)
+
         return context
