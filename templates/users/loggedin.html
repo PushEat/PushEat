@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+<link rel="stylesheet" href='{% static "/css/style.css" %}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
@@ -23,6 +25,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </a>
         <img class="w3-padding w3-center" src="{% static 'img/user_icon.png' %}" alt="" style="width: 100px"><br>
         <h4><b>{{ full_name }}</b></h4>
+        <h4><b>{{ name }}</b></h4>
         <p class="w3-text-grey">PushEat generic account.</p>
     </div>
     <div class="w3-bar-block">
@@ -61,9 +64,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h1><b>PushEat</b></h1>
             <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
                 <span class="w3-margin-right">Filter:</span>
-                <button class="w3-button" style="background-color: lightgray"><i class="fas fa-utensils  w3-margin-right"></i>My bids</button>
-                <button class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</button>
-                <button class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</button>
+                <a class="w3-button" style="background-color: lightgray"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
+                <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+                <a class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
             </div>
         </div>
     </header>

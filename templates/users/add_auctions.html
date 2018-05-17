@@ -1,15 +1,89 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
 {% extends "users/loggedin.html" %} {% load staticfiles %}
+<link rel="stylesheet" href='{% static "/css/style.css" %}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+{% block header %}
+<header id="portfolio">
+    <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+        <div class="w3-col" style="width: 70px; margin-top: 20px">
+            <img src="{% static 'img/logo.png' %}" width="75" style="margin-top: -10px">
+        </div>
+        <h1><b>PushEat</b></h1>
+        <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
+            <span class="w3-margin-right">Filter:</span>
+            <a href="/users/loggedin" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
+            <a href="/users/add_auctions" class="w3-button w3-gray w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+            <a class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
+        </div>
+    </div>
+</header>
+{% endblock %}
 
 {% block body %}
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
         <h5> Here you can see and create your auctions. </h5>
+        <button class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New auction</button>
         <hr>
         {% for auction in auctions %}
-            <h6>{{ auction.food }}</h6>
+            <div class="w3-col 6 m3 w3-margin">
+                <div class="w3-card-4" style="border-radius: 4px">
+                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
+                    </header>
+                    <div class="w3-container w3-white" style="border-radius: 4px">
+                        <h6 class="w3-text-dark-gray"><b> Food:  {{ auction.food.name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Initial Price:  {{ auction.start_price }}€</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Actual Price:  {{ auction.actual_price }}€</b></h6>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
     </div>
 
+    <div id="id01" class="modal" style="z-index: 100">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="/users/new_auction/" method="POST"> {% csrf_token %}
+        <div class="imgcontainer">
+          <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
+        </div>
+
+        <div class="container">
+            <label for="food"><i class="fa fa-lemon"></i><b> Food</b></label>
+            <input type="text" placeholder="Enter Food" id="food" name="food" required style="width: 100%">
+            <br>
+            <label for="price"><i class="fa fa-dollar"></i><b> Start Price</b></label>
+            <input type="number" placeholder="Enter Starting Price $" id="price" name="price" required style="width: 100%">
+            <label for="desc"><i class="fa fa-comment"></i><b> Description</b></label>
+            <input type="text" placeholder="Enter Starting Price" id="desc" name="desc" required style="width: 100%">
+            <label for="desc"><i class="fa fa-clock"></i><b> Available time</b></label>
+            <input type="time" placeholder="Available_time" id="time" name="time" required style="width: 100%">
+            <button class="myButton" type="submit">
+                Add Offer <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+
+
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
 {% endblock %}

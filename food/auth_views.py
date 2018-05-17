@@ -39,6 +39,7 @@ def loggedin(request):
 def invalid_login(request):
     return render_to_response('users/invalid.html')
 
+
 class AddAuctions(ListView):
     model = FoodOffer
     template_name = 'users/add_auctions.html'
@@ -46,6 +47,26 @@ class AddAuctions(ListView):
     def get_context_data(self, **kwargs):
         context = super(AddAuctions, self).get_context_data(**kwargs)
 
-        context['auctions'] = FoodOffer.objects.all().filter(owner=self.request.user)
+        print "BEFORE"
+        subscribeds = Subscribed.objects.all().filter(user=self.request.user)
+        context['auctions'] = FoodOffer.objects.all().filter(owner=subscribeds)
+        context['name'] = subscribeds.get()
 
         return context
+
+
+def auction_view(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+
+    # new instance of FoodOffer
+
+    if user is not None:
+        auth.login(request, user)
+        return HttpResponseRedirect('/users/loggedin')
+    else:
+        return HttpResponseRedirect('/users/invalid')
+
+# Si no tenen el mateix nom (User-Subscribbed) peta
+# user = Subscribed.objects.all().filter(user=self.request.user)
+# users = Subscribed.objects.all()
