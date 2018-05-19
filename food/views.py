@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView
+
+from food.forms import MyBidsForm
 from food.models import *
 from django.views.generic import ListView
 
@@ -57,4 +59,5 @@ class AuctionsView(ListView):
 
 class MyBidsView(CreateView):
     model = Bid
-    fields = ['Amount']
+    form_class = MyBidsForm
+
