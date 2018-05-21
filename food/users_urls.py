@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^add_auctions/$', AddAuctions.as_view(), name='add_auctions'),
     url(r'^add_food/$', AddFoods.as_view(), name='add_food'),
     url(r'^new_auction/$', auction_view, name='auction_view'),
+    url(r'^my_valoration/', MyValorationView.as_view(), name='my_valoration'),
 ]

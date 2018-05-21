@@ -60,6 +60,8 @@ class MyValorationView(ListView):
     template_name = 'my_valoration.html'
 
     def get_context_data(self, **kwargs):
+
         context = super(MyValorationView, self).get_context_data(**kwargs)
-        context['myvaloration'] = Subscribed.objects.all().order_by('-rate')[:1]
+        context['users'] = Subscribed.objects.all().filter(user=self.request.user)
+
         return context
