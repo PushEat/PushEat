@@ -2,6 +2,10 @@
 <link rel="stylesheet" href='{% static "/css/style.css" %}'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 {% block header %}
 <header id="portfolio">
     <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
@@ -93,4 +97,48 @@
         }
     }
     </script>
+
+<script>
+    var d = new Date();
+    var n = d.getTime();
+    $(function() {
+
+        $("#name").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "http://platform.fatsecret.com/rest/server.api",
+                    dataType: "json",
+                    data: {
+                        oauth_consumer_key: "94417348fe614a7ca5b187b7357da2f6",
+                        oauth_signature_method: "HMAC-SHA1",
+                        oauth_timestamp: n,
+                        oauth_nonce: "uniquevaluestring",
+                        oauth_version: "1.0",
+                        oauth_signature: "94417348fe614a7ca5b187b7357da2f6HMAC-SHA11526977000uniquevaluestring1.0",
+                        method: "foods.search",
+                        search_expression: request.term,
+                        max_results: 10,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        response($.map(data.data.results, function(item) {
+                            return {
+                                food_type: item.food_type,
+                                food_name: item.food_name
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 3,
+            select: function(event, ui) {
+                if (ui.item) {
+                    $("#type").val(ui.item.food_type);
+                    $("#name").val(ui.item.food_name);
+                }
+            }
+        });
+    });
+</script>
+
 {% endblock %}
