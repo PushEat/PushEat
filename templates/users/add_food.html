@@ -20,6 +20,7 @@
             <a href="/users/loggedin" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
             <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
             <a href="/users/add_food" class="w3-button w3-gray w3-hide-small"><i class="fas fa-lemon w3-margin-right"></i>Foods</a>
+            <a href="/users/api" class="w3-button w3-white w3-hide-small"><i class="fas fa-puzzle-piece w3-margin-right"></i>FatSecret</a>
         </div>
     </div>
 </header>
@@ -28,20 +29,21 @@
 {% block body %}
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
-        <h5> Here you can see and create your auctions. </h5>
+        <h5> Here you can see existent foods, create new one or create auctions of specific food. </h5>
         <button class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New food</button>
         <hr>
         {% for food in foods %}
             <div class="w3-col 6 m3 w3-margin">
-                <div class="w3-card-4" style="border-radius: 4px">
+                <div class="w3-card-4" style="border-radius: 4px; height: 250px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ food.type }}</b></h3>
                     </header>
-                    <div class="w3-container w3-white" style="border-radius: 4px">
+                    <div class="w3-container w3-white" style="border-radius: 4px; height: 200px">
                         <h6 class="w3-text-dark-gray"><b> Food:  {{ food.name }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Calories:  {{ food.calories }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Fats:  {{ food.fats }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Proteins:  {{ food.protein }}</b></h6>
+                        <a class="btn w3-right" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
                     </div>
                 </div>
             </div>
@@ -56,14 +58,19 @@
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
       <!-- Modal Content -->
-      <form class="modal-content animate" action="/users/new_auction/" method="POST"> {% csrf_token %}
+      <form class="modal-content animate" action="/users/new_food/" method="POST"> {% csrf_token %}
         <div class="imgcontainer">
           <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
         </div>
 
         <div class="container">
             <label for="type"><i class="fa fa-lemon"></i><b> Type</b></label>
-            <input type="text" placeholder="Food Type" id="type" name="type" required style="width: 100%" disabled>
+            <select type="text" placeholder="Food Type" id="type" name="type" required style="width: 100%">
+              <option value="Main Dish">Main Dish</option>
+              <option value="Previous Dish">Previous Dish</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Drink">Drink</option>
+            </select>
             <br>
             <label for="name"><i class="fa fa-dollar"></i><b> Name</b></label>
             <input type="text" placeholder="Food Name" id="name" name="name" required style="width: 100%">
@@ -74,7 +81,7 @@
             <label for="protein"><i class="fa fa-comment"></i><b> Proteins</b></label>
             <input type="number" placeholder="Food Proteins" id="protein" name="protein" required style="width: 100%">
             <button class="myButton" type="submit">
-                Add Offer <i class="fas fa-angle-right"></i>
+                Add Food <i class="fas fa-angle-right"></i>
             </button>
         </div>
 

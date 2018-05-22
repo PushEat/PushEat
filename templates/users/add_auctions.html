@@ -16,6 +16,7 @@
             <a href="/users/loggedin" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
             <a href="/users/add_auctions" class="w3-button w3-gray w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
             <a href="/users/add_food" class="w3-button w3-white w3-hide-small"><i class="fas fa-lemon w3-margin-right"></i>Foods</a>
+            <a href="/users/api" class="w3-button w3-white w3-hide-small"><i class="fas fa-puzzle-piece w3-margin-right"></i>FatSecret</a>
         </div>
     </div>
 </header>
@@ -24,7 +25,7 @@
 {% block body %}
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
-        <h5> Here you can see and create your auctions. </h5>
+        <h5> Here you can manage your auctions. </h5>
         <button class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New auction</button>
         <hr>
         {% for auction in auctions %}
@@ -35,10 +36,10 @@
                     </header>
                     <div class="w3-container w3-white" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Food:  {{ auction.food.name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Description:  {{ auction.description}}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Initial Price:  {{ auction.start_price }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Actual Price:  {{ auction.actual_price }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Expiration Time:  {{ auction.available_time }}<p id="demo"></p></b></h6>
-                        <button onclick="getCountDown( {{ auction.available_time }} )">Click me</button>
                     </div>
                 </div>
             </div>
