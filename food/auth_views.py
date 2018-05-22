@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from models import *
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from os import system
 from views import get_member
 import string
@@ -85,32 +85,6 @@ class AddBids(ListView):
 
         return context
 
-
-@login_required(login_url='/users/login/')
-def add_bids(request, pk):
-        if request.method == "GET":
-            foodOffer = get_object_or_404(FoodOffer, pk=pk)
-
-            bidder = Subscribed.objects.all().filter(user=request.user)
-
-            dic = {
-
-                "foodOffer": foodOffer,
-                "foodName": foodOffer.food.name,
-                'user': bidder.user,
-            }
-            return render(request, 'users/bids.html', dic)
-        else:
-            offer = request.POST.get('foodOffer')
-            bidder = request.POST.get()
-            amount = request.POST.get('amount', None)
-            bid = get_object_or_404(Bid, pk=pk)
-            bid.amount = amount
-            bid.save()
-
-            return HttpResponseRedirect("/users/add_auctions/")
-
-
 class AuctionsUserView(ListView):
     model = FoodOffer
     template_name = 'users/user_last_auctions.html'
@@ -120,3 +94,32 @@ class AuctionsUserView(ListView):
 
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
+
+@login_required(login_url='/users/login/')
+def add_bids(request, pk):
+    username = request.user.username
+    if request.method == "GET":
+        foodOffer = get_object_or_404(FoodOffer, pk=pk)
+        dic = {
+            "Bid": Bid.objects.all(),
+            "foodOffer": FoodOffer.objects.all().filter(pk=pk)
+        }
+        return render(request, 'users/add_bids.html', dic)
+    else:
+        bidder = username
+        offer = FoodOffer.objects.all().filter(pk=pk)
+        amount = request.POST.get('amount', None)
+        bid = Bid(bidder=bidder,
+                  offer=offer,
+                  amount=amount)
+        bid.save()
+
+    return HttpResponseRedirect("users/mybids")
+
+
+class CreateBid(CreateView):
+    model = Bid
+    template_name = 'users/bids.html'
+    fields = ('bidder',
+              'offer',
+              'amount')

@@ -1,16 +1,46 @@
-
+{% extends "users/loggedin.html" %} {% load staticfiles %}
+{% block header %}
 <div class="w3-panel w3-leftbar w3-padding w3-border-green w3-container">
-        <h2><i class="fa fa-newspaper"></i> Bid on: {{ Bid. }}</h2>
+        <h2><i class="fa fa-newspaper"></i> Assign new: {{ new.title }}</h2>
         <form method="POST"> {% csrf_token %}
-            <label style="margin-left: 35px"><i class="fa fa-exclamation"></i> FoodOffer</label>
-            {% for food in foods %}
-            {% endfor %}
+            <div class="w3-margin w3-padding w3-row">
+                <label class="w3-col l12"><i class="fa fa-pencil-alt"></i> Editor</label>
+                <input placeholder="designer Selected..." class="w3-col l8 w3-border w3-padding w3-input" type="text" id="designerid" name="editor"
+                    required>
+                <div class="w3-dropdown-hover w3-round-large w3-right w3-col l3">
+                    <a class="w3-button w3-green w3-round-large">Select editor</a>
+                    <div class="w3-dropdown-content w3-bar-block w3-border">
+                        {% for editor in editors %}
+                        <a onclick="insert('{{ editor.name }}')" value="{{ editor.pk }}" href="#" class="w3-bar-item w3-button">{{ editor.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <label style="margin-left: 35px"><i class="fa fa-exclamation"></i> Priority</label>
+
+            <div class="w3-row-paddiong w3-center">
+                <p class="w3-col l3">
+                    <input class="w3-radio w3-margin-right" type="radio" name="priority" value="1" checked>
+                    <label>Low</label>
+                </p>
+                <p class="w3-col l3">
+                    <input class="w3-radio w3-margin-right" type="radio" name="priority" value="2">
+                    <label>Medium</label>
+                </p>
+                <p class="w3-col l3">
+                    <input class="w3-radio w3-margin-right" type="radio" name="priority" value="3">
+                    <label>High</label>
+                </p>
+            </div>
+
             <div class="w3-margin w3-padding" style="width: 67%">
-                <label><i class="fa fa-comment-alt"></i> Amount</label>
-                <input class="w3-input w3-border w3-padding" type="number" name="amount" required>
+                <label><i class="fa fa-comment-alt"></i> Subject</label>
+                <input class="w3-input w3-border w3-padding" type="text" name="body" required>
             </div>
             <button class="w3-button w3-green w3-round-large" style="margin-left: 35px">Assign
                 <i class="fa fa-angle-right"></i>
             </button>
         </form>
-</div>
+    </div>
+{% endblock %}{% block body %} {% endblock %}
+
