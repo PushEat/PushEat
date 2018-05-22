@@ -56,8 +56,3 @@ class AuctionsView(ListView):
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
 
-
-class MyBidsView(CreateView):
-    model = Bid
-    form_class = MyBidsForm
-

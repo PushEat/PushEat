@@ -13,8 +13,8 @@
         <h1><b>PushEat</b></h1>
         <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
             <span class="w3-margin-right">Filter:</span>
-            <a href="/users/add_bids" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
-            <a href="/users/add_auctions" class="w3-button w3-gray w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+            <a href="/users/add_bids" class="w3-button w3-gray w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
+            <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
             <a class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
         </div>
     </div>
@@ -24,19 +24,19 @@
 {% block body %}
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
-        <h5> Here you can see and create your auctions. </h5>
-        <button class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New auction</button>
+        <h5> Here you can see and create your bids. </h5>
+        <button class="addBid" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> Add your bid</button>
         <hr>
-        {% for auction in auctions %}
+        {% for bid in bids %}
             <div class="w3-col 6 m3 w3-margin">
                 <div class="w3-card-4" style="border-radius: 4px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
-                        <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ bid.offer.food.type}}</b></h3>
                     </header>
                     <div class="w3-container w3-white" style="border-radius: 4px">
-                        <h6 class="w3-text-dark-gray"><b> Food:  {{ auction.food.name }}</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Initial Price:  {{ auction.start_price }}€</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Actual Price:  {{ auction.actual_price }}€</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Last Auctioner:  {{ bid.bidder }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Auction FoodOffer:  {{ bid.offer.food.name}}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Your bid amount:  {{ bid.amount }}€</b></h6>
                     </div>
                 </div>
             </div>
@@ -47,23 +47,22 @@
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
       <!-- Modal Content -->
-      <form class="modal-content animate" action="/users/new_auction/" method="POST"> {% csrf_token %}
+      <form class="modal-content animate" action="/users/loggedin/" method="POST"> {% csrf_token %}
         <div class="imgcontainer">
           <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
         </div>
 
         <div class="container">
-            <label for="food"><i class="fa fa-lemon"></i><b> Food</b></label>
-            <input type="text" placeholder="Enter Food" id="food" name="food" required style="width: 100%">
+            <label for="food"><i class="fa fa-lemon"></i><b> Auction Food</b></label>
+            <select id="food" required style="width: 100%">
+            {% for food in foods %}
+                <option value="food"><b>{{ food.food.name}}</b></option>
+            {% endfor %}
             <br>
-            <label for="price"><i class="fa fa-dollar"></i><b> Start Price</b></label>
-            <input type="number" placeholder="Enter Starting Price $" id="price" name="price" required style="width: 100%">
-            <label for="desc"><i class="fa fa-comment"></i><b> Description</b></label>
-            <input type="text" placeholder="Enter Starting Price" id="desc" name="desc" required style="width: 100%">
-            <label for="desc"><i class="fa fa-clock"></i><b> Available time</b></label>
-            <input type="time" placeholder="Available_time" id="time" name="time" required style="width: 100%">
+            <label for="price"><i class="fa fa-dollar"></i><b> Your bid</b></label>
+            <input type="number" placeholder="Enter your bid amount here €" id="price" name="price" required style="width: 100%">
             <button class="myButton" type="submit">
-                Add Offer <i class="fas fa-angle-right"></i>
+                Add Bid <i class="fas fa-angle-right"></i>
             </button>
         </div>
 

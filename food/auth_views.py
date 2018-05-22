@@ -1,3 +1,5 @@
+
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse, render_to_response
 from django.contrib import auth
@@ -70,3 +72,30 @@ def auction_view(request):
 # Si no tenen el mateix nom (User-Subscribbed) peta
 # user = Subscribed.objects.all().filter(user=self.request.user)
 # users = Subscribed.objects.all()
+
+
+class AddBids(ListView):
+    model = Bid
+    template_name = 'users/add_bids.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AddBids, self).get_context_data(**kwargs)
+
+        subscribeds = Subscribed.objects.all().filter(user=self.request.user)
+        context['bids'] = Bid.objects.all().filter(bidder=subscribeds)
+        context['name'] = subscribeds.get()
+        context['foods'] = FoodOffer.objects.all()
+
+        return context
+
+def bid_view(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+
+    # new instance of Bid
+
+    if user is not None:
+        auth.login(request, user)
+        return HttpResponseRedirect('/users/add_bids')
+    else:
+        return HttpResponseRedirect('/users/invalid')
