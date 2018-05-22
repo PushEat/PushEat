@@ -15,5 +15,5 @@ urlpatterns = [
     url(r'^add_food/$', AddFoods.as_view(), name='add_food'),
     url(r'^new_auction/(?P<pk>\d+)', auction_view, name='auction_view'),
     url(r'^new_food/$', food_add_view, name='food_view'),
-    url(r'^api/$', TemplateView.as_view(template_name="users/api.html"), name='food_view'),
+    url(r'^api/$', api_view, name='food_view'),
 ]

@@ -131,3 +131,7 @@ def auction_view(request, pk):
         food_offer.save()
 
         return HttpResponseRedirect("/users/add_auctions")
+
+
+def api_view(request):
+    return render_to_response('users/api.html', {'full_name': request.user.username})
