@@ -12,35 +12,36 @@
         </div>
         <h1><b>PushEat</b></h1>
         <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
-            <a href = "/users/mybids" class="w3-button" style="background-color: lightgray"><i class="far fa-money-bill-alt w3-margin-right"></i>My bids</a>
+            <a href = "/users/mybids" class="w3-button" style="background-color: white"><i class="far fa-money-bill-alt w3-margin-right"></i>My bids</a>
             <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
             <a class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
-            <a href = "/users/user_auctions" class="w3-button" style="background-color: white"><i class="fas fa-utensils  w3-margin-right"></i>Last Auctions</a>
+            <a href = "/users/user_auctions" class="w3-button" style="background-color: lightgray"><i class="fas fa-utensils  w3-margin-right"></i>Last Auctions</a>
         </div>
     </div>
 </header>
 {% endblock %}
 
 {% block body %}
+        <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+            <h5 class="w3-text-gray"><b>Here you can see some of the lasts auctions.</b></h5>
+        </div>
 
-    <div class="w3-container w3-padding-large" style="margin-bottom:32px">
-        <h5> Here you can see and create your bids. </h5>
-        <button class="golink" type="submit" onclick= "window.location.href='/last_auctions/'"><i class="fas fa-plus"></i> See last auctions and bid for it</button>
-        <hr>
-        {% for bid in bids %}
-            <div class="w3-col 6 m3 w3-margin">
+        {% for auction in auctions %}
+            <div class="w3-col 6 m4 w3-margin">
                 <div class="w3-card-4" style="border-radius: 4px">
-                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
-                        <h3 class="w3-title w3-text-dark-gray"><b>{{ bid.offer.food.type}}</b></h3>
+                    <header class="w3-container w3-small" style="background-color: #baee97 ; border-radius: 4px">
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
                     </header>
                     <div class="w3-container w3-white" style="border-radius: 4px">
-                        <h6 class="w3-text-dark-gray"><b> Last Auctioner:  {{ bid.bidder }}</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Auction FoodOffer:  {{ bid.offer.food.name}}</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Your bid amount:  {{ bid.amount }}€</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Food: {{ auction.food.name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Auctioneer: {{ auction.owner.first_name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Initial Price: {{ auction.start_price }}€</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Actual Price: {{ auction.actual_price }}€</b></h6>
+                        <button class="w3-right" onclick="document.getElementById('id01').style.display='block'">Push <i class="fas fa-angle-right"></i></button>
                     </div>
                 </div>
             </div>
         {% endfor %}
-    </div>
 
 {% endblock %}
+

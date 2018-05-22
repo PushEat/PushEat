@@ -1,7 +1,6 @@
-
-
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, reverse, render_to_response
+from django.shortcuts import render, reverse, render_to_response, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -80,22 +79,44 @@ class AddBids(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AddBids, self).get_context_data(**kwargs)
-
         subscribeds = Subscribed.objects.all().filter(user=self.request.user)
         context['bids'] = Bid.objects.all().filter(bidder=subscribeds)
         context['name'] = subscribeds.get()
-        context['foods'] = FoodOffer.objects.all()
 
         return context
 
-def bid_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
 
-    # new instance of Bid
+@login_required(login_url='/users/login/')
+def add_bids(request, pk):
+        if request.method == "GET":
+            foodOffer = get_object_or_404(FoodOffer, pk=pk)
 
-    if user is not None:
-        auth.login(request, user)
-        return HttpResponseRedirect('/users/add_bids')
-    else:
-        return HttpResponseRedirect('/users/invalid')
+            bidder = Subscribed.objects.all().filter(user=request.user)
+
+            dic = {
+
+                "foodOffer": foodOffer,
+                "foodName": foodOffer.food.name,
+                'user': bidder.user,
+            }
+            return render(request, 'users/bids.html', dic)
+        else:
+            offer = request.POST.get('foodOffer')
+            bidder = request.POST.get()
+            amount = request.POST.get('amount', None)
+            bid = get_object_or_404(Bid, pk=pk)
+            bid.amount = amount
+            bid.save()
+
+            return HttpResponseRedirect("/users/add_auctions/")
+
+
+class AuctionsUserView(ListView):
+    model = FoodOffer
+    template_name = 'users/user_last_auctions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AuctionsUserView, self).get_context_data(**kwargs)
+
+        context['auctions'] = FoodOffer.objects.all().order_by('-pk')
+        return context
