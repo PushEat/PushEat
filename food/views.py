@@ -65,3 +65,13 @@ class MyValorationView(ListView):
         context['users'] = Subscribed.objects.all().filter(user=self.request.user)
 
         return context
+
+class UsersListView(ListView):
+    model = Subscribed
+    template_name = 'users_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UsersListView, self).get_context_data(**kwargs)
+        context['usersList'] = Subscribed.objects.all().order_by('-pk')
+        return context
+
