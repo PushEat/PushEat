@@ -4,5 +4,15 @@ Feature: Create a new auction
   I want to create a new auction
   so I can offer (sell) the food that I want
 
-  Scenario: # Enter scenario name here
-    # Enter steps here
+  Background: There is a registered user
+    Given Exists a user "user" with password "password"
+
+  Scenario: Register just auction food name
+    Given I login as user "user" with password "password"
+    When I create restaurant
+      | food        |
+      | Banana      |
+    Then I'm viewing the details page for restaurant by "user"
+      | food        |
+      | Banana      |
+    And There are 1 auctions

@@ -3,5 +3,5 @@ Feature: Login User
   As a non-register user
   I want to Log-In
   so I can use his services and enjoy it.
-  Scenario: # Enter scenario name here
+  Scenario:
     # Enter steps here
