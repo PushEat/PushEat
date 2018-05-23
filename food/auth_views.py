@@ -95,16 +95,16 @@ class AuctionsUserView(ListView):
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
 
-@login_required(login_url='/users/login/')
+@login_required(login_url='/users/login/')#ask mrcl
 def add_bids(request, pk):
-    username = request.user.username
+    username = Subscribed.objects.all().filter(pk=pk)
     if request.method == "GET":
         foodOffer = get_object_or_404(FoodOffer, pk=pk)
         dic = {
             "Bid": Bid.objects.all(),
             "foodOffer": FoodOffer.objects.all().filter(pk=pk)
         }
-        return render(request, 'users/add_bids.html', dic)
+        return render(request, 'users/bids.html', dic)
     else:
         bidder = username
         offer = FoodOffer.objects.all().filter(pk=pk)
@@ -116,10 +116,3 @@ def add_bids(request, pk):
 
     return HttpResponseRedirect("users/mybids")
 
-
-class CreateBid(CreateView):
-    model = Bid
-    template_name = 'users/bids.html'
-    fields = ('bidder',
-              'offer',
-              'amount')
