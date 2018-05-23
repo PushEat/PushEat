@@ -1,0 +1,151 @@
+{% extends "users/loggedin.html" %} {% load staticfiles %}
+<link rel="stylesheet" href='{% static "/css/style.css" %}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+{% block header %}
+<header id="portfolio">
+    <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+        <div class="w3-col" style="width: 70px; margin-top: 20px">
+            <img src="{% static 'img/logo.png' %}" width="75" style="margin-top: -10px">
+        </div>
+        <h1><b>PushEat</b></h1>
+        <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
+            <span class="w3-margin-right">Filter:</span>
+            <a href="/users/loggedin" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
+            <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+            <a href="/users/add_food" class="w3-button w3-gray w3-hide-small"><i class="fas fa-lemon w3-margin-right"></i>Foods</a>
+            <a href="/users/api" class="w3-button w3-white w3-hide-small"><i class="fas fa-puzzle-piece w3-margin-right"></i>FatSecret</a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block body %}
+
+    <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+        <h5> Here you can see existent foods, create new one or create auctions of specific food. </h5>
+        <button class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New food</button>
+        <hr>
+        {% for food in foods %}
+            <div class="w3-col 6 m3 w3-margin">
+                <div class="w3-card-4" style="border-radius: 4px; height: 250px">
+                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ food.type }}</b></h3>
+                    </header>
+                    <div class="w3-container w3-white w3-card" style="border-radius: 4px">
+                        <h6 class="w3-text-dark-gray"><b> Food:  {{ food.name }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Calories:  {{ food.calories }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Fats:  {{ food.fats }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Proteins:  {{ food.protein }}</b></h6>
+                        <a class="btn w3-right w3-margin w3-padding" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="w3-container w3-center">
+                <h4 class="w3-text-gray">No food yet.</h4>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="id01" class="modal" style="z-index: 100">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="/users/new_food/" method="POST"> {% csrf_token %}
+        <div class="imgcontainer">
+          <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
+        </div>
+
+        <div class="container">
+            <label for="type"><i class="fa fa-lemon"></i><b> Type</b></label>
+            <select type="text" placeholder="Food Type" id="type" name="type" required style="width: 100%">
+              <option value="Main Dish">Main Dish</option>
+              <option value="Previous Dish">Previous Dish</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Drink">Drink</option>
+            </select>
+            <br>
+            <label for="name"><i class="fa fa-dollar"></i><b> Name</b></label>
+            <input type="text" placeholder="Food Name" id="name" name="name" required style="width: 100%">
+            <label for="calories"><i class="fa fa-comment"></i><b> Calories</b></label>
+            <input type="number" placeholder="Food Calories" id="calories" name="calories" required style="width: 100%">
+            <label for="fats"><i class="fa fa-comment"></i><b> Fats</b></label>
+            <input type="number" placeholder="Food Fats" id="fats" name="fats" required style="width: 100%">
+            <label for="protein"><i class="fa fa-comment"></i><b> Proteins</b></label>
+            <input type="number" placeholder="Food Proteins" id="protein" name="protein" required style="width: 100%">
+            <button class="myButton" type="submit">
+                Add Food <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+
+
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+
+<script>
+    var d = new Date();
+    var n = d.getTime();
+    $(function() {
+
+        $("#name").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "http://platform.fatsecret.com/rest/server.api",
+                    dataType: "json",
+                    data: {
+                        oauth_consumer_key: "94417348fe614a7ca5b187b7357da2f6",
+                        oauth_signature_method: "HMAC-SHA1",
+                        oauth_timestamp: n,
+                        oauth_nonce: "uniquevaluestring",
+                        oauth_version: "1.0",
+                        oauth_signature: "94417348fe614a7ca5b187b7357da2f6HMAC-SHA11526977000uniquevaluestring1.0",
+                        method: "foods.search",
+                        search_expression: request.term,
+                        max_results: 10,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        response($.map(data.data.results, function(item) {
+                            return {
+                                food_type: item.food_type,
+                                food_name: item.food_name
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 3,
+            select: function(event, ui) {
+                if (ui.item) {
+                    $("#type").val(ui.item.food_type);
+                    $("#name").val(ui.item.food_name);
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

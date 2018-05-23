@@ -16,7 +16,7 @@ class LoginRequiredMixinStaff(object):
 
 
 def food_view(request):
-    return render(request, 'pushEat/homepage.html')
+    return render(request, 'food.html')
 
 
 def profile_view(request):
