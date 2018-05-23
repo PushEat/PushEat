@@ -89,18 +89,59 @@ def add_star(request, pk):
 
     subscribed_me = Subscribed.objects.filter(user=request.user)
 
-    friendship = Friendship(id(subscribed_me), me=subscribed_me[0])
+    friendship = Friendship.objects.filter(me=subscribed_me[0])
 
-    if user_obj not in friendship.friends.all():
+    if not friendship:
+        print "CASE: NO EXISTS"
+        friendship = Friendship(id(subscribed_me),me=subscribed_me[0])
+        friendship.save()
         rate = subscribed_obj.get().rate
-        rate+=1
+        rate += 1
         Subscribed.objects.filter(pk=pk).update(rate=rate)
         friendship.friends.add(user_obj)
+
+    elif friendship.get().friends.exists():
+        print "CASE: FRIENDS EXIST"
+        if friendship.get().friends.all().count() == 0:
+            print "CASE: 0 FRIENDS"
+            rate = subscribed_obj.get().rate
+            rate += 1
+            Subscribed.objects.filter(pk=pk).update(rate=rate)
+            friendship.get().friends.add(user_obj)
+        else:
+            if user_obj not in friendship.get().friends.all():
+                print "CASE: +1 FRIEND EXISTS + NO FOUND(add)"
+                rate = subscribed_obj.get().rate
+                rate+=1
+                Subscribed.objects.filter(pk=pk).update(rate=rate)
+                friendship.get().friends.add(user_obj)
+            else:
+                print "CASE: +1 FRIEND EXISTS + FOUND"
+                rate = subscribed_obj.get().rate
+                rate -= 1
+                Subscribed.objects.filter(pk=pk).update(rate=rate)
+                friendship.get().friends.remove(user_obj)
     else:
-        rate = subscribed_obj.get().rate
-        rate -= 1
-        Subscribed.objects.filter(pk=pk).update(rate=rate)
-        friendship.friends.add(user_obj)
+        print "CASE: FRIENDS NO EXISTS"
+        if friendship.get().friends.all().count() == 0:
+            print "CASE: 0 FRIENDS"
+            rate = subscribed_obj.get().rate
+            rate += 1
+            Subscribed.objects.filter(pk=pk).update(rate=rate)
+            friendship.get().friends.add(user_obj)
+        else:
+            if user_obj not in friendship.get().friends.all():
+                print "CASE: +1 FRIEND EXISTS + NO FOUND (add)"
+                rate = subscribed_obj.get().rate
+                rate+=1
+                Subscribed.objects.filter(pk=pk).update(rate=rate)
+                friendship.friends.add(user_obj)
+            else:
+                print "CASE: +1 FRIEND EXISTS + FOUND"
+                rate = subscribed_obj.get().rate
+                rate -= 1
+                Subscribed.objects.filter(pk=pk).update(rate=rate)
+                friendship.get().friends.remove(user_obj)
 
     return HttpResponseRedirect("/users/users_list")
 

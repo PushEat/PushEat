@@ -29,7 +29,7 @@ class Subscribed(models.Model):
 
 class Friendship(models.Model):
     me = models.OneToOneField(Subscribed, on_delete=models.CASCADE)
-    friends = models.ManyToManyField(User, blank=True)
+    friends = models.ManyToManyField(User)
 
 
 class Food(models.Model):
