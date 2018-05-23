@@ -38,12 +38,12 @@
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ food.type }}</b></h3>
                     </header>
-                    <div class="w3-container w3-white" style="border-radius: 4px; height: 200px">
+                    <div class="w3-container w3-white w3-card" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Food:  {{ food.name }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Calories:  {{ food.calories }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Fats:  {{ food.fats }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Proteins:  {{ food.protein }}</b></h6>
-                        <a class="btn w3-right" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
+                        <a class="btn w3-right w3-margin w3-padding" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
                     </div>
                 </div>
             </div>

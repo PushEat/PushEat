@@ -135,3 +135,11 @@ def auction_view(request, pk):
 
 def api_view(request):
     return render_to_response('users/api.html', {'full_name': request.user.username})
+
+
+def del_auction(request, pk):
+
+    auction = FoodOffer.objects.filter(pk=pk)
+    auction.delete()
+
+    return HttpResponseRedirect("/users/add_auctions")
