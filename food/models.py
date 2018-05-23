@@ -27,6 +27,11 @@ class Subscribed(models.Model):
         return u"%s" % self.first_name
 
 
+class Friendship(models.Model):
+    me = models.OneToOneField(Subscribed, on_delete=models.CASCADE)
+    friends = models.ManyToManyField(User)
+
+
 class Food(models.Model):
     type = models.CharField(blank=False, max_length=32)
     name = models.CharField(blank=False, max_length=32)
