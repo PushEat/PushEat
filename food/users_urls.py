@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^new_auction/$', auction_view, name='auction_view'),
     url(r'^my_valoration/', MyValorationView.as_view(), name='my_valoration'),
     url(r'^users_list/', UsersListView.as_view(), name='users_list'),
+    url(r'^add_star/(?P<pk>\d+)', add_star, name='add_star'),
 ]

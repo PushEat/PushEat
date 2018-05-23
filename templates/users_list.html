@@ -37,7 +37,7 @@
                         <h6 class="w3-text-dark-gray"><b> Postal Code: {{ user.postal_code }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Subscribed since: {{ user.subscription_date }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Valoration: {{ user.rate }} <i class="fa fa-star" style="color:yellow"></i> </b></h6>
-                        <button class="w3-right" onclick="add(){ user.rate = user.rate + 1  }"></i> Add </i><i class="fa fa-star" style="color:yellow"></i> <i class="fas fa-angle-right"></i></button>
+                        <button class="w3-right" onclick="window.location.href='/users/add_star/{{ user.pk }}'"></i> Add </i><i class="fa fa-star" style="color:yellow"></i> <i class="fas fa-angle-right"></i></button>
 
                     </div>
                 </div>

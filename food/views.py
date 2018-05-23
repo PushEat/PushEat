@@ -7,6 +7,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from food.models import *
 from django.views.generic import ListView
+from django.shortcuts import get_object_or_404
+
 
 # Security Mixins
 class LoginRequiredMixinStaff(object):
@@ -26,14 +28,17 @@ def profile_view(request):
 def login_page(request):
     return HttpResponseRedirect("/user/profile")
 
+
 def popular_users(request):
     return render(request, 'popular_users.html')
+
 
 def get_member(user):
     if Subscribed.objects.filter(user=user).exists():
         return Subscribed.objects.get(user=user)
 
     return None
+
 
 class popularUsersView(ListView):
     model = Subscribed
@@ -43,6 +48,7 @@ class popularUsersView(ListView):
         context = super(popularUsersView, self).get_context_data(**kwargs)
         context['popularusers'] = Subscribed.objects.all().order_by('-rate')[:4]
         return context
+
 
 class AuctionsView(ListView):
     model = FoodOffer
@@ -60,11 +66,11 @@ class MyValorationView(ListView):
     template_name = 'my_valoration.html'
 
     def get_context_data(self, **kwargs):
-
         context = super(MyValorationView, self).get_context_data(**kwargs)
         context['users'] = Subscribed.objects.all().filter(user=self.request.user)
 
         return context
+
 
 class UsersListView(ListView):
     model = Subscribed
@@ -72,14 +78,29 @@ class UsersListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(UsersListView, self).get_context_data(**kwargs)
-        context['usersList'] = Subscribed.objects.all().order_by('-pk')
+        context['usersList'] = Subscribed.objects.all().order_by('-rate')
         return context
 
-class AddValorationUserView(ListView):
-    model = Subscribed
-    template_name = 'users_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(AddValorationUserView, self).get_context_data(**kwargs)
-        context['addValoration'] = Subscribed.objects.all().filter(user=self.request.user)
-        return context
+@login_required(login_url='/users/login')
+def add_star(request, pk):
+    subscribed_obj = Subscribed.objects.filter(pk=pk)
+    user_obj = subscribed_obj.get().user
+
+    subscribed_me = Subscribed.objects.filter(user=request.user)
+
+    friendship = Friendship(id(subscribed_me), me=subscribed_me[0])
+
+    if user_obj not in friendship.friends.all():
+        rate = subscribed_obj.get().rate
+        rate+=1
+        Subscribed.objects.filter(pk=pk).update(rate=rate)
+        friendship.friends.add(user_obj)
+    else:
+        rate = subscribed_obj.get().rate
+        rate -= 1
+        Subscribed.objects.filter(pk=pk).update(rate=rate)
+        friendship.friends.add(user_obj)
+
+    return HttpResponseRedirect("/users/users_list")
+
