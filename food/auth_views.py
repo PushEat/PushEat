@@ -34,7 +34,7 @@ def auth_view(request):
 
 
 def loggedin(request):
-    return render_to_response('users/loggedin.html', {'full_name': request.user.username})
+    return render_to_response('users/add_bids.html', {'full_name': request.user.username})
 
 
 def invalid_login(request):
