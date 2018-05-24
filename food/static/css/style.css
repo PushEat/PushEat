@@ -36,11 +36,16 @@ button {
 .addAuction {
     width: 20%;
 }
+.addBid {
+    width: 20%;
+}
 
 button:hover {
     opacity: 0.8;
 }
-
+.w3-card-4{
+    width:250px;
+}
 /* Extra styles for the cancel button */
 .cancelbtn {
     width: auto;

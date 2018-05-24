@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse, render_to_response, get_object_or_404
 from django.contrib import auth
@@ -5,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from models import *
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from os import system
 from views import get_member
 import string
@@ -67,27 +68,6 @@ class AddFoods(ListView):
         return context
 
 
-# def auction_view(request):
-#     food = request.POST.get('food', '')
-#     food = Food.objects.all().filter(name=food).get()
-#     price = request.POST.get('price', '')
-#     desc = request.POST.get('desc', '')
-#     time = request.POST.get('time', '')
-#
-#     user = Subscribed.objects.all().filter(user=request.user)
-#
-#     print user
-#     print food
-#     print price
-#     print desc
-#     print time
-#
-#     food_offer = FoodOffer(owner=user[0], food=food, start_price=price,
-#                            actual_price=price, description=desc, available_time=time)
-#     food_offer.save()
-#     return HttpResponseRedirect(request.GET.get("next", "/users/add_auctions"))
-
-
 def food_add_view(request):
     type = request.POST.get('type', '')
     name = request.POST.get('name', '')
@@ -100,11 +80,50 @@ def food_add_view(request):
     return HttpResponseRedirect(request.GET.get("next", "/users/add_food"))
 
 
-# Si no tenen el mateix nom (User-Subscribbed) peta
-# user = Subscribed.objects.all().filter(user=self.request.user)
-# users = Subscribed.objects.all()
+class AddBids(ListView):
+    model = Bid
+    template_name = 'users/add_bids.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(AddBids, self).get_context_data(**kwargs)
+        subscribeds = Subscribed.objects.all().filter(user=self.request.user)
+        context['bids'] = Bid.objects.all().filter(bidder=subscribeds)
+        context['name'] = subscribeds.get()
 
+        return context
+
+class AuctionsUserView(ListView):
+    model = FoodOffer
+    template_name = 'users/user_last_auctions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AuctionsUserView, self).get_context_data(**kwargs)
+
+        context['auctions'] = FoodOffer.objects.all().order_by('-pk')
+        return context
+
+@login_required(login_url='/users/login/')#ask mrcl
+def add_bids(request, pk):
+    username = Subscribed.objects.all().filter(pk=pk)
+    if request.method == "GET":
+        foodOffer = get_object_or_404(FoodOffer, pk=pk)
+        dic = {
+            "Bid": Bid.objects.all(),
+            "foodOffer": FoodOffer.objects.all().filter(pk=pk)
+        }
+        return render(request, 'users/bids.html', dic)
+    else:
+        bidder = username
+        offer = FoodOffer.objects.all().filter(pk=pk)
+        amount = request.POST.get('amount', None)
+        bid = Bid(bidder=bidder,
+                  offer=offer,
+                  amount=amount)
+        bid.save()
+
+    return HttpResponseRedirect("users/mybids")
+
+  
 def auction_view(request, pk):
     if request.method == "GET":
         food = get_object_or_404(Food, pk=pk)

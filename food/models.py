@@ -15,10 +15,9 @@ class Subscribed(models.Model):
     last_name = models.CharField(blank=False, max_length=16)
     age = models.PositiveIntegerField(blank=False)
     address = models.CharField(blank=False, max_length=64)
-    # country = CountryField()
-    postal_code = models.PositiveIntegerField()
+    postal_code = models.PositiveIntegerField(blank=True, null=True)
     subscription_date = models.DateField(default=date.today)
-    rate = models.PositiveIntegerField(blank=False, null=False)
+    rate = models.PositiveIntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
         return u"%s" % self.first_name

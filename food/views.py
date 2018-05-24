@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
+
+from food.forms import MyBidsForm
 from food.models import *
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
@@ -60,7 +62,7 @@ class AuctionsView(ListView):
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
 
-
+      
 class MyValorationView(ListView):
     model = Subscribed
     template_name = 'my_valoration.html'
@@ -144,4 +146,4 @@ def add_star(request, pk):
                 friendship.get().friends.remove(user_obj)
 
     return HttpResponseRedirect("/users/users_list")
-
+  

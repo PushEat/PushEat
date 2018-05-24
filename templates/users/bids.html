@@ -1,0 +1,111 @@
+{% extends "users/loggedin.html" %} {% load staticfiles %}
+<link rel="stylesheet" href='{% static "/css/style.css" %}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+{% block header %}
+<header id="portfolio">
+    <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+        <div class="w3-col" style="width: 70px; margin-top: 20px">
+            <img src="{% static 'img/logo.png' %}" width="75" style="margin-top: -10px">
+        </div>
+        <h1><b>PushEat</b></h1>
+        <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
+            <span class="w3-margin-right">Filter:</span>
+                <a href = "/users/mybids" class="w3-button" style="background-color: white"><i class="far fa-money-bill-alt w3-margin-right"></i>My bids</a>
+                <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+                <a class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
+                <a href = "/users/user_auctions" class="w3-button" style="background-color: lightgray"><i class="fas fa-utensils  w3-margin-right"></i>Last Auctions</a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block body %}
+
+    <div id="id01" class="modal" style="z-index: 100">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="/users/mybids/" method="POST"> {% csrf_token %}
+        <div class="imgcontainer">
+          <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
+        </div>
+
+        <div class="container">
+            <label for="offer"><i class="fa fa-comment"></i><b> Food Offer</b></label>
+            <input type="number" placeholder="Food Calories" id="offer" name="offer" required style="width: 100%">
+            <label for="amount"><i class="fa fa-comment"></i><b> Amount</b></label>
+            <input type="number" placeholder="amountMoney" id="amount" name="amount" required style="width: 100%">
+            <button class="myButton" type="submit">
+                Add Bid <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+
+
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    var d = new Date();
+    var n = d.getTime();
+    $(function() {
+        $("#name").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "http://platform.fatsecret.com/rest/server.api",
+                    dataType: "json",
+                    data: {
+                        oauth_consumer_key: "94417348fe614a7ca5b187b7357da2f6",
+                        oauth_signature_method: "HMAC-SHA1",
+                        oauth_timestamp: n,
+                        oauth_nonce: "uniquevaluestring",
+                        oauth_version: "1.0",
+                        oauth_signature: "94417348fe614a7ca5b187b7357da2f6HMAC-SHA11526977000uniquevaluestring1.0",
+                        method: "foods.search",
+                        search_expression: request.term,
+                        max_results: 10,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        response($.map(data.data.results, function(item) {
+                            return {
+                                food_type: item.food_type,
+                                food_name: item.food_name
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 3,
+            select: function(event, ui) {
+                if (ui.item) {
+                    $("#type").val(ui.item.food_type);
+                    $("#name").val(ui.item.food_name);
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}
