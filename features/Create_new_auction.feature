@@ -5,10 +5,10 @@ Feature: Create a new auction
   so I can offer (sell) the food that I want
 
   Background: There is a registered user
-    Given Exists a user "user" with password "password"
+    Given Exists a user "mantonia" with password "123password"
 
   Scenario: Register just auction food name
-    Given I login as user "user" with password "password"
+    Given I login as user "mantonia" with password "123password"
     When I create restaurant
       | food        |
       | Banana      |

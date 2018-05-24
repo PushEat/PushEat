@@ -6,7 +6,7 @@ from django.test.runner import DiscoverRunner
 from django.test.testcases import LiveServerTestCase
 from splinter.browser import Browser
 
-os.environ["DJANGO_SETTINGS_MODULE"] = ".settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "PushEatApp.settings"
 
 class ExtendedContext(Context):
     def get_url(self, to=None, *args, **kwargs):
@@ -17,7 +17,7 @@ def before_all(context):
     django.setup()
     context.test_runner = DiscoverRunner()
     context.test_runner.setup_test_environment()
-    context.browser = Browser('firefox', headless=True)
+    context.browser = Browser('firefox', headless=False)
 
 def before_scenario(context, scenario):
     context.old_db_config = context.test_runner.setup_databases()
