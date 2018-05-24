@@ -1,27 +1,52 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
 {% extends "base/leftBar.html" %} {% load staticfiles %}
+
 
 {% block header %}
 
- <h2>Sign up</h2>
-  <form method="post">
-    <div class="w3-center w3-col" style="margin-left: 20%; margin-top: 5%; background-color: lightgrey; width: 250px; border-radius: 10px">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-     <button class="w3-margin w3-button w3-hover-green" type="submit" style="margin-top: 20px; background-color: #8fd08d; border-radius: 10px">
-        <label class="w3-text-gray"><i class="fas fa-user-plus"></i> Sign Up</label>
-    </button>
-    </div>
-  </form>
+ <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+            <div class="w3-rest">
+                <h1><b>Register Page</b></h1>
+                <h5 class="w3-text-gray"><b>Introduce your data</b></h5>
+                <hr style="width:50px;border:5px solid black" class="w3-round">
+            </div>
+        </div>
+        <div class="login-page">
+            <div class="w3-row" style="margin-bottom: 50px">
+                <div class="form" style="margin-bottom: 50px">
+                    {% if form.errors %}
+                        <p class="error">Sorry that's not a valid username or password</p>
+                    {% endif %}
+                      <form method="post">
+                        <div class="w3-center w3-col" style="margin-left: 20%; margin-top: 5%; background-color: lightgrey; width: 250px; border-radius: 10px">
+                        <br>
+                        {% csrf_token %}
+                        {% for field in form %}
+                          <p>
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                              <small style="color: grey">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                              <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                          </p>
+                        {% endfor %}
+                         <button class="w3-margin w3-button w3-hover-green" type="submit" style="margin-top: 20px; background-color: #8fd08d; border-radius: 10px">
+                            <label class="w3-text-gray"><i class="fas fa-user-plus"></i> Sign Up</label>
+                        </button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+ </div>
 
 {% endblock %}
