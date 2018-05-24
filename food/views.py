@@ -74,7 +74,7 @@ class MyValorationView(ListView):
 
 class UsersListView(ListView):
     model = Subscribed
-    template_name = 'users_list.html'
+    template_name = 'users/users_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(UsersListView, self).get_context_data(**kwargs)
