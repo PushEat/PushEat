@@ -38,7 +38,7 @@
                         <h6 class="w3-text-dark-gray"><b> Auctioneer: {{ auction.owner.first_name }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Initial Price: {{ auction.start_price }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Actual Price: {{ auction.actual_price }}€</b></h6>
-                        <button class="w3-right" onclick="window.location.href='/users/add_bids/{{auction.pk}}'">Push <i class="fas fa-angle-right"></i></button>
+                        <a class="btn w3-right w3-margin w3-padding" href="/users/add_bids/{{ auction.pk }}"><i class="fas fa-plus"></i> New Bid</a>
                     </div>
                 </div>
             </div>

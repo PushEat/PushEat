@@ -102,27 +102,6 @@ class AuctionsUserView(ListView):
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
         return context
 
-@login_required(login_url='/users/login/')#ask mrcl
-def add_bids(request, pk):
-    username = Subscribed.objects.all().filter(pk=pk)
-    if request.method == "GET":
-        foodOffer = get_object_or_404(FoodOffer, pk=pk)
-        dic = {
-            "Bid": Bid.objects.all(),
-            "foodOffer": FoodOffer.objects.all().filter(pk=pk)
-        }
-        return render(request, 'users/bids.html', dic)
-    else:
-        bidder = username
-        offer = FoodOffer.objects.all().filter(pk=pk)
-        amount = request.POST.get('amount', None)
-        bid = Bid(bidder=bidder,
-                  offer=offer,
-                  amount=amount)
-        bid.save()
-
-    return HttpResponseRedirect("users/mybids")
-
   
 def auction_view(request, pk):
     if request.method == "GET":
@@ -150,6 +129,41 @@ def auction_view(request, pk):
         food_offer.save()
 
         return HttpResponseRedirect("/users/add_auctions")
+
+
+def bids_view(request, pk):
+    if request.method == "GET":
+        food_offer = get_object_or_404(FoodOffer, pk=pk)
+
+        member = get_member(request.user)
+
+        dic = {
+            "foodOffers": FoodOffer.objects.all(),
+            "foodOffer": food_offer,
+        }
+        return render(request, 'users/new_bid.html', dic)
+    else:
+        user = Subscribed.objects.all().filter(user=request.user)
+
+        food_offer = get_object_or_404(FoodOffer, pk=pk)
+        price = request.POST.get('price', '')
+
+        dic = {
+            "foodOffers": FoodOffer.objects.all(),
+            "foodOffer": food_offer,
+            "error": "Bid amount must be bigger than actual auction price!"
+        }
+
+        if int(price) > food_offer.actual_price:
+            # Generate Bid
+            bid = Bid(bidder=user.get(), offer=food_offer, amount=price)
+            food_offer.actual_price = price
+            food_offer.save()
+            bid.save()
+        else:
+            return render(request, 'users/new_bid.html', dic)
+
+        return HttpResponseRedirect("/users/mybids")
 
 
 def api_view(request):
