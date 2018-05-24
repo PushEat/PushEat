@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+{% extends 'users/loggedin.html' %} {% load staticfiles %}
+{% block header %}
+<header id="portfolio">
+    <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+        <div class="w3-col" style="width: 70px; margin-top: 20px">
+            <img src="{% static 'img/logo.png' %}" width="75" style="margin-top: -10px">
+        </div>
+        <h1><b>PushEat</b></h1>
+        <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
+            <span class="w3-margin-right">Filter:</span>
+            <a href="/users/loggedin" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>My bids</a>
+            <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+            <a href="/users/add_food" class="w3-button w3-white w3-hide-small"><i class="fas fa-lemon w3-margin-right"></i>Foods</a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block body %}
+    <div class="w3-container w3-padding-large w3-border-light-green" style="margin-bottom:32px">
+        <h4>Hi {{ users.first }} your bids valoration are: </h4>
+        <hr>
+    </div>
+     {% for user in users %}
+            <div class="w3-col 6 m4 w3-margin">
+                <div class="w3-card-4" style="border-radius: 4px">
+                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
+                        <h3 class="w3-title w3-text-dark-gray"><b>{{ user.first_name }}, {{ user.last_name }}</b></h3>
+                    </header>
+                    <div class="w3-container w3-white" style="border-radius: 4px">
+                        <h6 class="w3-text-dark-gray"><b> Age: {{ user.age }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Address: {{ user.address }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Postal Code: {{ user.postal_code }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Subscribed since: {{ user.subscription_date }}</b></h6>
+                        <h6 class="w3-text-dark-gray"><b> Valoration: {{ user.rate }} <i class="fa fa-star" style="color:yellow"></i> </b></h6>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}
+
+{% block footer %}
+
+    <div class="w3-bottom w3-padding-20 w3-center" style="background-color: lightgray">Powered by <a href="https://github.com/PushEat/PushEat" title="W3.CSS" target="_blank" class="w3-hover-opacity">PushEat developers team <i class="fab fa-github"></i></a></div>
+
+{% endblock %}

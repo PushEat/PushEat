@@ -48,7 +48,6 @@ class AddAuctions(ListView):
     def get_context_data(self, **kwargs):
         context = super(AddAuctions, self).get_context_data(**kwargs)
 
-        print "BEFORE"
         subscribeds = Subscribed.objects.all().filter(user=self.request.user)
         context['auctions'] = FoodOffer.objects.all().filter(owner=subscribeds)
         context['name'] = subscribeds.get()
@@ -56,21 +55,29 @@ class AddAuctions(ListView):
         return context
 
 
-def auction_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
+class AddFoods(ListView):
+    model = Food
+    template_name = 'users/add_food.html'
 
-    # new instance of FoodOffer
+    def get_context_data(self, **kwargs):
+        context = super(AddFoods, self).get_context_data(**kwargs)
 
-    if user is not None:
-        auth.login(request, user)
-        return HttpResponseRedirect('/users/loggedin')
-    else:
-        return HttpResponseRedirect('/users/invalid')
+        context['name'] = Subscribed.objects.all().filter(user=self.request.user).get()
+        context['foods'] = Food.objects.all()
 
-# Si no tenen el mateix nom (User-Subscribbed) peta
-# user = Subscribed.objects.all().filter(user=self.request.user)
-# users = Subscribed.objects.all()
+        return context
+
+
+def food_add_view(request):
+    type = request.POST.get('type', '')
+    name = request.POST.get('name', '')
+    calories = request.POST.get('calories', '')
+    fats = request.POST.get('fats', '')
+    protein = request.POST.get('protein', '')
+
+    food_obj = Food(type=type, name=name, calories=calories, fats=fats, protein=protein)
+    food_obj.save()
+    return HttpResponseRedirect(request.GET.get("next", "/users/add_food"))
 
 
 class AddBids(ListView):
@@ -116,3 +123,42 @@ def add_bids(request, pk):
 
     return HttpResponseRedirect("users/mybids")
 
+  
+def auction_view(request, pk):
+    if request.method == "GET":
+        food = get_object_or_404(Food, pk=pk)
+
+        member = get_member(request.user)
+
+        dic = {
+            "foods": Food.objects.all(),
+            "food": food,
+        }
+        return render(request, 'users/new_auction.html', dic)
+    else:
+        user = Subscribed.objects.all().filter(user=request.user)
+
+        food = get_object_or_404(Food, pk=pk)
+        price = request.POST.get('price', '')
+        desc = request.POST.get('desc', '')
+        time = request.POST.get('time', '')
+
+        # Generate foodOffer
+        food_offer = FoodOffer(owner=user[0], food=food, start_price=price,
+                               actual_price=price, description=desc, available_time=time)
+
+        food_offer.save()
+
+        return HttpResponseRedirect("/users/add_auctions")
+
+
+def api_view(request):
+    return render_to_response('users/api.html', {'full_name': request.user.username})
+
+
+def del_auction(request, pk):
+
+    auction = FoodOffer.objects.filter(pk=pk)
+    auction.delete()
+
+    return HttpResponseRedirect("/users/add_auctions")

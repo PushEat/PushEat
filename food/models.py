@@ -26,6 +26,11 @@ class Subscribed(models.Model):
         return u"%s" % self.first_name
 
 
+class Friendship(models.Model):
+    me = models.OneToOneField(Subscribed, on_delete=models.CASCADE)
+    friends = models.ManyToManyField(User)
+
+
 class Food(models.Model):
     type = models.CharField(blank=False, max_length=32)
     name = models.CharField(blank=False, max_length=32)
@@ -49,7 +54,7 @@ class FoodOffer(models.Model):
     actual_price = models.PositiveIntegerField(blank=False, null=False)
     last_price = models.PositiveIntegerField(blank=True, null=True)
     description = models.CharField(blank=False, max_length=64, null=False)
-    available_time = models.PositiveIntegerField(blank=False, null=False)
+    available_time = models.TimeField(blank=False, null=False)
 
     def __str__(self):
         return u"%s" % self.owner.first_name + ", " + self.food.name
