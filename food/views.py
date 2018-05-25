@@ -19,6 +19,10 @@ class LoginRequiredMixinStaff(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
+def contact_view(request):
+    return render(request, 'contact.html')
+
+
 def food_view(request):
     return render(request, 'food.html')
 
@@ -70,6 +74,7 @@ class MyValorationView(ListView):
     def get_context_data(self, **kwargs):
         context = super(MyValorationView, self).get_context_data(**kwargs)
         context['users'] = Subscribed.objects.all().filter(user=self.request.user)
+        context['name'] = self.request.user.username
 
         return context
 
