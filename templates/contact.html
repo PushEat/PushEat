@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+{% extends "base/leftBar.html" %} {% load staticfiles %}
+
+{% block header %}
+
+    <div class="w3-container" style="margin-top:80px" id="showcase">
+        <div class="w3-row">
+            <div class="w3-col" style="width: 70px; margin-top: 20px">
+                <img src="{% static 'img/logo.png' %}" width="75">
+            </div>
+            <div class="w3-rest">
+                <h1><b>Contact</b></h1>
+                <h5 class="w3-text-gray"><b>Here you can see PushEat S.A. contact information.</b></h5>
+                <hr style="width:50px;border:5px solid black" class="w3-round">
+            </div>
+            <div style="margin-top: 50px; margin-left: 40px">
+                <div class="w3-container w3-left" style="width: 25%">
+                    <h6><b style="font-size: large">·Enterprise name:</b> PushEat S.A.</h6><br>
+                    <h6><b style="font-size: large">·Developer team:</b><br>
+                        <li class="w3-ul" style="margin-left: 60px; margin-top: 5px">- Marcel Ortiz</li>
+                        <li class="w3-ul" style="margin-left: 60px">- Oscar Lopez</li>
+                        <li class="w3-ul" style="margin-left: 60px">- Gerard Donaire</li>
+                    </h6><br>
+                    <h6><b style="font-size: large">·Enterprise ubication:</b> C/Jaume II nº69 (Lleida)</h6><br>
+                    <h6><b style="font-size: large">·University host:</b> Universitat de Lleida</h6><br>
+                    <h6><b style="font-size: large">·Email:</b> webprojectudl@gmail.com</h6><br>
+                </div>
+
+                <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+                <div style='overflow:hidden;height:400px;width:600px; margin-left: 20px;margin-bottom: 10px' class="w3-right">
+                    <div id='gmap_canvas' style='height:400px;width:400px;'></div>
+                    <div><small><a href="embedgooglemaps.com/es/">https://embedgooglemaps.com/es/</a></small></div>
+                    <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
+                </div>
+                <script type='text/javascript'>function init_map(){var myOptions = {zoom:16,center:new google.maps.LatLng(41.6081936,0.6234530000000404),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(41.6081936,0.6234530000000404)});infowindow = new google.maps.InfoWindow({content:'<strong>Título</strong><br>Carrer de Jaume II, 69, 25001 Lleida<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}
