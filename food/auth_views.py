@@ -100,6 +100,7 @@ class AuctionsUserView(ListView):
         context = super(AuctionsUserView, self).get_context_data(**kwargs)
 
         context['auctions'] = FoodOffer.objects.all().order_by('-pk')
+        context['name'] = self.request.user.username
         return context
 
   
