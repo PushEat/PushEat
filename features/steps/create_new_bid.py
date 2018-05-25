@@ -45,7 +45,6 @@ def step_impl(context):
 def step_impl(context):
     bidInfo = context.browser.find_by_id('bidInfo')
     for i, row in enumerate(context.table):
-        time.sleep(20)
         assert row['bidder'] in bidInfo[i].text
         assert row['offer'] in bidInfo[i].text
         assert row['amount'] in bidInfo[i].text

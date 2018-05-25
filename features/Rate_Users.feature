@@ -14,3 +14,5 @@ Feature: Rate other users
   Scenario: Rate user
     When I login as user "user1" with password "123password"
     Then I rate up a user
+    |rate|
+    |21  |
