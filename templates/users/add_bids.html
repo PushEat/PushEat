@@ -15,7 +15,7 @@
             <a href = "/users/mybids" class="w3-button w3-gray w3-hide-small"><i class="far fa-money-bill-alt w3-margin-right"></i>My bids</a>
             <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
             <a href="/users/users_list" class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
-            <a href = "/users/user_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>Last Auctions</a>
+            <a id="auctions"  href = "/users/user_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-utensils  w3-margin-right"></i>Last Auctions</a>
             <a id="btn-food" href="/users/add_food" class="w3-button w3-white w3-hide-small"><i class="fas fa-lemon w3-margin-right"></i>Foods</a>
             <a href="/users/api" class="w3-button w3-white w3-hide-small"><i class="fas fa-puzzle-piece w3-margin-right"></i>FatSecret</a>
         </div>
@@ -35,7 +35,7 @@
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ bid.offer.food.type}}</b></h3>
                     </header>
-                    <div class="w3-container w3-white" style="border-radius: 4px">
+                    <div id="bidInfo" class="w3-container w3-white" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Last Auctioner:  {{ bid.bidder }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Auction FoodOffer:  {{ bid.offer.food.name}}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Your bid amount:  {{ bid.amount }}€</b></h6>
