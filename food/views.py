@@ -74,6 +74,7 @@ class MyValorationView(ListView):
     def get_context_data(self, **kwargs):
         context = super(MyValorationView, self).get_context_data(**kwargs)
         context['users'] = Subscribed.objects.all().filter(user=self.request.user)
+        context['name'] = self.request.user.username
 
         return context
 

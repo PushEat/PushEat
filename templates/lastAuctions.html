@@ -19,15 +19,15 @@
         {% for auction in auctions %}
             <div class="w3-col 6 m4 w3-margin">
                 <div class="w3-card-4" style="border-radius: 4px">
-                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
+                    <header class="w3-container" style="background-color: #baee97; border-radius: 4px 4px 0 0">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
                     </header>
-                    <div class="w3-container w3-white" style="border-radius: 4px">
+                    <div class="w3-container w3-white" style="border-radius: 4px; margin-top: 10px">
                         <h6 class="w3-text-dark-gray"><b> Food: {{ auction.food.name }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Auctioneer: {{ auction.owner.first_name }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Initial Price: {{ auction.start_price }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Actual Price: {{ auction.actual_price }}€</b></h6>
-                        <button class="w3-right" onclick="document.getElementById('id01').style.display='block'">Push <i class="fas fa-angle-right"></i></button>
+                        <button class="w3-right w3-margin" style="border-radius: 4px" onclick="document.getElementById('id01').style.display='block'">Push <i class="fas fa-angle-right"></i></button>
                     </div>
                 </div>
             </div>
