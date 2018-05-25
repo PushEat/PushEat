@@ -26,3 +26,14 @@ https://github.com/PushEat/PushEat/blob/master/heroku.md
 #### Superuser Credentials
       user: root
       password: 123password
+      
+
+#### Users Credentials
+      user: user1
+      password: 123password
+      
+      user: user2
+      password: 123password
+      
+      user: user3
+      password: 123password
