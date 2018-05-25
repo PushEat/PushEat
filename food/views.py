@@ -19,6 +19,10 @@ class LoginRequiredMixinStaff(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
+def contact_view(request):
+    return render(request, 'contact.html')
+
+
 def food_view(request):
     return render(request, 'food.html')
 
