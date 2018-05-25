@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href='{% static "/css/style.css" %}'>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <body>
 <!-- Sidebar/menu -->
 {% block navbar %}
@@ -20,18 +21,17 @@
 </div>
 <div class="w3-bar-block">
     <a href="/" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fa fa-home"></i> Home</a>
-    <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fa fa-bullhorn"></i> Last Auctions</a>
-    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-users"></i> Popular Users</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-user-plus"></i> SingUp</a>
+    <a href="/last_auctions" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fa fa-bullhorn"></i> Last Auctions</a>
+    <a href="/popular_users" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-users"></i> Popular Users</a>
+    <a href="/users/register" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-user-plus"></i> SingUp</a>
     <a href="/users/login" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-sign-in-alt"></i> SingIn</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="/contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 </nav>
 {% endblock %}
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-xlarge w3-padding" style="background-color: #e6e6e6">
-<a href="javascript:void(0)" class="w3-button w3-light-grey w3-margin-right" onclick="w3_open()">☰</a>
-<span>PushEat</span>
+<a href="javascript:void(0)" style="border-radius: 5px" class="w3-button w3-light-grey w3-margin-right" onclick="w3_open()">☰</a>
 </header>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -47,7 +47,21 @@
     <h1 class="w3-jumbo"><b>Push Eat</b></h1>
     <h3 class="w3-xxlarge w3-text-gray"><b>Let's take some food!</b></h3>
     <hr style="width:50px;border:5px solid black" class="w3-round">
+    <div class="w3-row">
+          <div class="w3-container w3-left" style="width: 20%">
+              <img style="border-radius: 4px" src="https://78.media.tumblr.com/bf057e09ef7e08150a6a95206dc0a0a2/tumblr_or8wvvwD781rl04amo1_500.jpg" alt="Pikaburger">
+          </div>
+          <div class="w3-container w3-right" style="width: 45%">
+                <h4 class="" align="justify"><b>Hi! We are one of the UdL developers teams.</b></h4>
+                <p>The purpose of this website is to bring the opportunity of eat to anyone in any place at any hour.
+                This website will let you to:
+                </p>
+                <li class="w3-ul">· To add the excess of food that you have as an auction.</li>
+                <li class="w3-ul">· To buy dishes a near as you can imagin form your home.</li>
+          </div>
+    </div>
 </div>
+
 {% endblock %}
 
 {# SCRIPTS #}

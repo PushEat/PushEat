@@ -16,7 +16,7 @@ Including another URLconf
 from django.views.generic.base import TemplateView
 from django.conf.urls import url, include
 from django.contrib import admin
-from food.views import food_view, popular_users, popularUsersView
+from food.views import *
 from food.views import profile_view
 
 urlpatterns = [
@@ -25,4 +25,7 @@ urlpatterns = [
     url(r'^api/', food_view, name='food_view'),
     url(r'^users/', include('food.users_urls', namespace='users')),
     url(r'^popular_users/', popularUsersView.as_view(), name='popular_users'),
+    url(r'^last_auctions/', AuctionsView.as_view(), name='last_auctions'),
+    url(r'^contact/', contact_view, name='last_auctions'),
+
 ]

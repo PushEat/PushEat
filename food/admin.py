@@ -7,6 +7,7 @@ import models
 
 admin.site.register(models.Subscribed)
 admin.site.register(models.Food)
-admin.site.register(models.FoodOfer)
+admin.site.register(models.FoodOffer)
 admin.site.register(models.Bid)
 admin.site.register(models.Message)
+admin.site.register(models.Friendship)

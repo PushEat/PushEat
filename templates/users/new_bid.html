@@ -1,0 +1,56 @@
+{% extends "users/loggedin.html" %} {% load staticfiles %}
+<link rel="stylesheet" href='{% static "/css/style.css" %}'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+{% block header %}
+<header id="portfolio">
+    <a onclick="w3_open()"><img src="{% static 'img/user_icon.png' %}" style="width:50px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+        <div class="w3-col" style="width: 70px; margin-top: 20px">
+            <img src="{% static 'img/logo.png' %}" width="75" style="margin-top: -10px">
+        </div>
+        <h1><b>PushEat</b></h1>
+        <div class="w3-section w3-bottombar w3-padding-16 w3-border-light-green" style="border-color: lightgreen">
+            <a href = "/users/mybids" class="w3-button w3-white w3-hide-small"><i class="far fa-money-bill-alt w3-margin-right"></i>My bids</a>
+            <a href="/users/add_auctions" class="w3-button w3-white w3-hide-small"><i class="fas fa-gavel w3-margin-right"></i>My auctions</a>
+            <a href="/users/users_list" class="w3-button w3-white w3-hide-small"><i class="fas fa-users w3-margin-right"></i>Users</a>
+            <a href = "/users/user_auctions" class="w3-button w3-gray w3-hide-small" style="background-color: white"><i class="fas fa-utensils  w3-margin-right"></i>Last Auctions</a>
+            <a href="/users/add_food" class="w3-button w3-white w3-hide-small"><i class="fas fa-lemon w3-margin-right"></i>Foods</a>
+            <a href="/users/api" class="w3-button w3-white w3-hide-small"><i class="fas fa-puzzle-piece w3-margin-right"></i>FatSecret</a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block body %}
+<div style="width: 75%; margin-left: 30px; margin-top: 30px; margin-bottom: 30px">
+    <div class="w3-container" style="background-color: #90EE90">
+        <h2 class="w3-text-black">New bid of {{ foodOffer.food.name }} auction</h2>
+    </div>
+    <h6>{{ error }}</h6>
+    <div class="w3-light-gray" style="width: 75%; border-color: gray; border-radius: 5px">
+
+        <form class="w3-card modal-content" action="/users/add_bids/{{ foodOffer.pk }}" method="POST" style="border-radius: 5px"> {% csrf_token %}
+
+        <div class="container" style="border-radius: 5px">
+            <label for="food"><i class="fa fa-lemon"></i><b> Food Auction</b></label>
+            <input type="text" placeholder="Enter Food" id="food" name="food" value="{{ foodOffer.food.name }}" required style="width: 100%" disabled>
+            <br>
+            <label for="price"><i class="fa fa-dollar"></i><b> Bid Amount (Actual Price: {{ foodOffer.actual_price }}€)</b></label>
+            <input type="number" placeholder="Enter Bid $" id="price" name="price" required style="width: 100%">
+            <label for="desc"><i class="fa fa-clock"></i><b> Auction Expiration Time:  {{ foodOffer.available_time }}</b></label>
+            <button class="myButton" type="submit">
+                Add Auction <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+
+      </form>
+
+    </div>
+</div>
+{% endblock %}
