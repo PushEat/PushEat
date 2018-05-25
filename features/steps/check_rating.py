@@ -11,9 +11,8 @@ def step_impl(context):
     about = context.browser.find_by_id('my-rate')
     about.find_by_css('a.w3-button').first.click()
 
-@then("I will see my rate")#nose pq pero no vec la info de lusuari:( pot ser pq no tenim static files
+@then("I will see my rate")
 def step_impl(context):
-    time.sleep(100)
     profiles = context.browser.find_by_id('my-stars')
 
     for i, row in enumerate(context.table):
