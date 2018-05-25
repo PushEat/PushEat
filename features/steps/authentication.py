@@ -15,7 +15,7 @@ def step_impl(context, username, password):
     form = context.browser.find_by_tag('form').first
     context.browser.fill('username', username)
     context.browser.fill('password', password)
-    form.find_by_css('button.btn-success').first.click()
+    form.find_by_css('button.w3-button').first.click()
     assert context.browser.is_text_present(username)
 
 @given('I\'m not logged in')
@@ -38,3 +38,13 @@ def step_impl(context, link_text):
 @then("I'm redirected to the login form")
 def step_impl(context):
     assert context.browser.url.startswith(context.get_url('login'))
+
+
+@when('I login as user "user1" with password "123password"')
+def step_impl(context):
+    context.browser.visit(context.get_url('/users/login'))
+    form = context.browser.find_by_tag('form').first
+    context.browser.fill('username', 'user1')
+    context.browser.fill('password', '123password')
+    form.find_by_css('button.w3-button').first.click()
+    assert context.browser.is_text_present('user1')

@@ -32,15 +32,15 @@
             <div class="w3-col 6 m3 w3-margin">
                 <div class="w3-card-4" style="border-radius: 4px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
-                        <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
+                        <h3 id="type" class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
                     </header>
-                    <div class="w3-container w3-white" style="border-radius: 4px">
+                    <div id="auctionInfo" class="w3-container w3-white" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Food:  {{ auction.food.name }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Description:  {{ auction.description}}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Initial Price:  {{ auction.start_price }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Actual Price:  {{ auction.actual_price }}€</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Expiration Time:  {{ auction.available_time }}<p id="demo"></p></b></h6>
-                        <a class="btn-red w3-right w3-padding w3-margin" href="/users/del_auction/{{ auction.pk }}"><i class="fas fa-trash" style="margin-bottom: -10px;"></i> Delete</a>
+                        <a id="del" class="btn-red w3-right w3-padding w3-margin" href="/users/del_auction/{{ auction.pk }}"><i class="fas fa-trash" style="margin-bottom: -10px;"></i> Delete</a>
                     </div>
                 </div>
             </div>

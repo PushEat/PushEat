@@ -31,20 +31,20 @@
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
         <h5> Here you can see existent foods, create new one or create auctions of specific food. </h5>
-        <button class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New food</button>
+        <button id="new_food" class="addAuction" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New food</button>
         <hr>
         {% for food in foods %}
             <div class="w3-col 6 m3 w3-margin">
                 <div class="w3-card-4" style="border-radius: 4px; height: 250px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
-                        <h3 class="w3-title w3-text-dark-gray"><b>{{ food.type }}</b></h3>
+                        <h3 id="type" class="w3-title w3-text-dark-gray"><b>{{ food.type }}</b></h3>
                     </header>
-                    <div class="w3-container w3-white w3-card" style="border-radius: 4px">
-                        <h6 class="w3-text-dark-gray"><b> Food:  {{ food.name }}</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Calories:  {{ food.calories }}</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Fats:  {{ food.fats }}</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Proteins:  {{ food.protein }}</b></h6>
-                        <a class="btn w3-right w3-margin w3-padding" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
+                    <div id="foodInfo" class="w3-container w3-white w3-card" style="border-radius: 4px">
+                        <h6 id="name" class="w3-text-dark-gray"><b> Food:  {{ food.name }}</b></h6>
+                        <h6 id="calories" class="w3-text-dark-gray"><b> Calories:  {{ food.calories }}</b></h6>
+                        <h6 id="fats" class="w3-text-dark-gray"><b> Fats:  {{ food.fats }}</b></h6>
+                        <h6 id="protein" class="w3-text-dark-gray"><b> Proteins:  {{ food.protein }}</b></h6>
+                        <a id="createAuction" class="btn w3-right w3-margin w3-padding" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
                     </div>
                 </div>
             </div>
