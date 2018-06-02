@@ -86,6 +86,7 @@ class UsersListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(UsersListView, self).get_context_data(**kwargs)
         context['usersList'] = Subscribed.objects.all().order_by('-rate')
+        context['name'] = self.request.user.username
         return context
 
 
@@ -151,4 +152,4 @@ def add_star(request, pk):
                 friendship.get().friends.remove(user_obj)
 
     return HttpResponseRedirect("/users/users_list")
-  
+

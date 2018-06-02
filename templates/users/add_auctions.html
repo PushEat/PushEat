@@ -1,6 +1,9 @@
 {% extends "users/loggedin.html" %} {% load staticfiles %}
+
 <link rel="stylesheet" href='{% static "/css/style.css" %}'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+<span vocab="http://schema.org/" typeof="Offer">
 
 {% block header %}
 <header id="portfolio">
@@ -33,12 +36,17 @@
                 <div class="w3-card-4" style="border-radius: 4px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 id="type" class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
+                        <span property="additionalType">{{ auction.food.type }}</span>
                     </header>
                     <div id="auctionInfo" class="w3-container w3-white" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Food:  {{ auction.food.name }}</b></h6>
+                        <span property="name">{{ auction.food.name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Description:  {{ auction.description}}</b></h6>
+                        <span typeof="Person" property="offeredBy">{{ auction.owner.first_name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Initial Price:  {{ auction.start_price }}€</b></h6>
+                        <span property="price">{{ auction.start_price }}</span>
                         <h6 class="w3-text-dark-gray"><b> Actual Price:  {{ auction.actual_price }}€</b></h6>
+                        <span property="price">{{ auction.actual_price }}</span>
                         <h6 class="w3-text-dark-gray"><b> Expiration Time:  {{ auction.available_time }}<p id="demo"></p></b></h6>
                         <a id="del" class="btn-red w3-right w3-padding w3-margin" href="/users/del_auction/{{ auction.pk }}"><i class="fas fa-trash" style="margin-bottom: -10px;"></i> Delete</a>
                     </div>
@@ -59,13 +67,17 @@
         <div class="container">
             <label for="food"><i class="fa fa-lemon"></i><b> Food</b></label>
             <input type="text" placeholder="Enter Food" id="food" name="food" required style="width: 100%">
+            <span property="name">{{ auction.food.name }}</span>
             <br>
             <label for="price"><i class="fa fa-dollar"></i><b> Start Price</b></label>
             <input type="number" placeholder="Enter Starting Price $" id="price" name="price" required style="width: 100%">
+            <span property="price">{{ auction.start_price }}</span>
             <label for="desc"><i class="fa fa-comment"></i><b> Description</b></label>
             <input type="text" placeholder="Short description of the product" id="desc" name="desc" required style="width: 100%">
             <label for="desc"><i class="fa fa-clock"></i><b> Expiration time</b></label>
+            <span property="itemCondition">{{ auction.start_price }}</span>
             <input type="time" placeholder="Expiration time" id="time" name="time" required style="width: 100%">
+            <span property="availabilityEnds">{{ auction.start_price }}</span>
             <button class="myButton" type="submit">
                 Add Offer <i class="fas fa-angle-right"></i>
             </button>

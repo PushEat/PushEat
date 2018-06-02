@@ -1,10 +1,13 @@
 {% extends "users/loggedin.html" %} {% load staticfiles %}
+
 <link rel="stylesheet" href='{% static "/css/style.css" %}'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-2.2.3.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<span vocab="http://schema.org/" typeof="MenuItem" hidden>
 
 {% block header %}
 <header id="portfolio">
@@ -38,12 +41,17 @@
                 <div class="w3-card-4" style="border-radius: 4px; height: 250px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 id="type" class="w3-title w3-text-dark-gray"><b>{{ food.type }}</b></h3>
+                        <span property="additionalType" hidden>{{ auction.food.type }}</span>
                     </header>
                     <div id="foodInfo" class="w3-container w3-white w3-card" style="border-radius: 4px">
                         <h6 id="name" class="w3-text-dark-gray"><b> Food:  {{ food.name }}</b></h6>
+                        <span property="name" hidden>{{ food.name }}</span>
                         <h6 id="calories" class="w3-text-dark-gray"><b> Calories:  {{ food.calories }}</b></h6>
+                        <span property="description" hidden>{{ food.calories }}</span>
                         <h6 id="fats" class="w3-text-dark-gray"><b> Fats:  {{ food.fats }}</b></h6>
+                        <span property="description" hidden>{{ food.fats }}</span>
                         <h6 id="protein" class="w3-text-dark-gray"><b> Proteins:  {{ food.protein }}</b></h6>
+                        <span property="description" hidden>{{ food.protein }}</span>
                         <a id="createAuction" class="btn w3-right w3-margin w3-padding" href="/users/new_auction/{{ food.pk }}"><i class="fas fa-plus"></i> New Auction</a>
                     </div>
                 </div>
