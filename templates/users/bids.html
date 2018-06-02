@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block body %}
-    <span vocab="http://schema.org/" typeof="Offer">
+    <span hidden vocab="http://schema.org/" typeof="Offer">
     <div id="id01" class="modal" style="z-index: 100">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
@@ -40,10 +40,10 @@
         <div class="container">
             <label for="offer"><i class="fa fa-comment"></i><b> Food Offer</b></label>
             <input type="number" placeholder="Food Calories" id="offer" name="offer" required style="width: 100%">
-            <span property="additionalType">{{ bid.offer.food.type}}</span>
+            <span hidden property="additionalType">{{ bid.offer.food.type}}</span>
             <label for="amount"><i class="fa fa-comment"></i><b> Amount</b></label>
             <input type="number" placeholder="amountMoney" id="amount" name="amount" required style="width: 100%">
-            <span property="eligibleQuantity">{{ bid.amount}}</span>
+            <span hidden property="eligibleQuantity">{{ bid.amount}}</span>
             <button class="myButton" type="submit">
                 Add Bid <i class="fas fa-angle-right"></i>
             </button>

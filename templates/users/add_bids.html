@@ -26,7 +26,7 @@
 
 {% block body %}
 
-    <span vocab="http://schema.org/" typeof="Offer">
+    <span hidden vocab="http://schema.org/" typeof="Offer">
 
     <div class="w3-container w3-padding-large" style="margin-bottom:32px">
         <h5> Here you can see and create your bids. </h5>
@@ -37,15 +37,15 @@
                 <div class="w3-card-4" style="border-radius: 4px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ bid.offer.food.type}}</b></h3>
-                             <span property="additionalType">{{ bid.offer.food.type}}</span>
+                             <span hidden property="additionalType">{{ bid.offer.food.type}}</span>
                     </header>
                     <div id="bidInfo" class="w3-container w3-white" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Last Auctioner:  {{ bid.bidder }}</b></h6>
-                        <span typeof="Person" property="OfferedBy">{{ bid.bidder}}</span>
+                        <span hidden typeof="Person" property="OfferedBy">{{ bid.bidder}}</span>
                         <h6 class="w3-text-dark-gray"><b> Auction FoodOffer:  {{ bid.offer.food.name}}</b></h6>
-                        <span property="name">{{ bid.offer.food.name}}</span>
+                        <span hidden property="name">{{ bid.offer.food.name}}</span>
                         <h6 class="w3-text-dark-gray"><b> Your bid amount:  {{ bid.amount }}€</b></h6>
-                        <span property="eligibleQuantity">{{ bid.amount}}</span>
+                        <span hidden property="eligibleQuantity">{{ bid.amount}}</span>
                     </div>
                 </div>
             </div>
