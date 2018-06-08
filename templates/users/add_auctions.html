@@ -3,7 +3,7 @@
 <link rel="stylesheet" href='{% static "/css/style.css" %}'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
-<span vocab="http://schema.org/" typeof="Offer">
+<span vocab="http://schema.org/" typeof="Offer" hidden></span>
 
 {% block header %}
 <header id="portfolio">
@@ -36,17 +36,17 @@
                 <div class="w3-card-4" style="border-radius: 4px">
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px">
                         <h3 id="type" class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
-                        <span property="additionalType">{{ auction.food.type }}</span>
+                        <span property="additionalType" hidden>{{ auction.food.type }}</span>
                     </header>
                     <div id="auctionInfo" class="w3-container w3-white" style="border-radius: 4px">
                         <h6 class="w3-text-dark-gray"><b> Food:  {{ auction.food.name }}</b></h6>
-                        <span property="name">{{ auction.food.name }}</span>
+                        <span property="name" hidden>{{ auction.food.name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Description:  {{ auction.description}}</b></h6>
-                        <span typeof="Person" property="offeredBy">{{ auction.owner.first_name }}</span>
+                        <span typeof="Person" property="offeredBy" hidden>{{ auction.owner.first_name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Initial Price:  {{ auction.start_price }}€</b></h6>
-                        <span property="price">{{ auction.start_price }}</span>
+                        <span property="price" hidden>{{ auction.start_price }}</span>
                         <h6 class="w3-text-dark-gray"><b> Actual Price:  {{ auction.actual_price }}€</b></h6>
-                        <span property="price">{{ auction.actual_price }}</span>
+                        <span property="price" hidden>{{ auction.actual_price }}</span>
                         <h6 class="w3-text-dark-gray"><b> Expiration Time:  {{ auction.available_time }}<p id="demo"></p></b></h6>
                         <a id="del" class="btn-red w3-right w3-padding w3-margin" href="/users/del_auction/{{ auction.pk }}"><i class="fas fa-trash" style="margin-bottom: -10px;"></i> Delete</a>
                     </div>

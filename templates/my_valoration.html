@@ -23,28 +23,28 @@
 </header>
 {% endblock %}
 {% block body %}
-    <span vocab="http://schema.org/" typeof="Person">
+    <span vocab="http://schema.org/" typeof="Person" hidden></span>
     <div class="w3-container w3-padding-large w3-border-light-green" style="margin-bottom:32px">
      {% for user in users %}
             <div class="w3-col 6 m4 w3-margin">
                     <header class="w3-container">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ user.first_name }}, {{ user.last_name }}</b></h3>
-                        <span property="givenName">{{ user.first_name }}</span>
-                        <span property="familyName">{{ user.last_name }}</span>
+                        <span property="givenName" hidden>{{ user.first_name }}</span>
+                        <span property="familyName" hidden>{{ user.last_name }}</span>
                     </header>
                     <div class="w3-container">
                         <h6 class="w3-text-dark-gray"><b> Age: {{ user.age }}</b></h6>
-                        <span property="description">{{ user.age }}</span>
+                        <span property="description" hidden>{{ user.age }}</span>
                         <h6 class="w3-text-dark-gray"><b> Address: {{ user.address }}</b></h6>
-                        <span property="description">{{ user.address }}</span>
+                        <span property="description" hidden>{{ user.address }}</span>
                         <h6 class="w3-text-dark-gray"><b> Postal Code: {{ user.postal_code }}</b></h6>
-                        <span property="address">{{ user.postal_code }}</span>
+                        <span property="address" hidden>{{ user.postal_code }}</span>
                         <h6 class="w3-text-dark-gray"><b> Email: {{ user.user.email }}</b></h6>
-                        <span property="email">{{ user.user.email }}</span>
+                        <span property="email" hidden>{{ user.user.email }}</span>
                         <h6 class="w3-text-dark-gray"><b> Subscribed since: {{ user.subscription_date }}</b></h6>
-                        <span property="description">{{ user.subscription_date }}</span>
+                        <span property="description" hidden>{{ user.subscription_date }}</span>
                         <h6 class="w3-text-dark-gray"><b  id="my-stars" > Valoration: {{ user.rate }} <i class="fa fa-star" style="color:yellow"></i> </b></h6>
-                        <span property="description">{{ user.rate }}</span>
+                        <span property="description" hidden>{{ user.rate }}</span>
                     </div>
             </div>
         {% endfor %}
