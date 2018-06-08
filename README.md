@@ -12,12 +12,31 @@ First of all, you have to register on docker and heroku.
 
 #### - Deploy Docker
 Simple instructions of how to deploy a docker container system on your app:
-https://github.com/carlesm/minidjangoapp/blob/master/deploymentfiles/heroku.md
+https://github.com/PushEat/PushEat/blob/master/docker.md
 
 #### - Deploy Heroku
-Simple instructions of how to make heroku host your app:
-https://github.com/carlesm/minidjangoapp/blob/master/deploymentfiles/heroku.md
+Simple instructions of how to make heroku host your app: 
+https://github.com/PushEat/PushEat/blob/master/heroku.md
 
 ### Database Diagram (Models)
 
 ![alt text](media/DatabaseDiagram.png)
+
+#### How to use behave testing tool
+Use the following command into your commandline(cmd):
+      *behave*
+    
+#### Superuser Credentials
+      user: root
+      password: 123password
+      
+
+#### Users Credentials
+      user: user1
+      password: 123password
+      
+      user: user2
+      password: 123password
+      
+      user: user3
+      password: 123password

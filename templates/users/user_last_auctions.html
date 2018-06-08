@@ -42,6 +42,7 @@
                         <span property="name" hidden>{{ auction.food.name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Auctioneer: {{ auction.owner.first_name }}</b></h6>
                         <span typeof="Person" property="offeredBy" hidden>{{ auction.owner.first_name }}</span>
+                        <h6 class="w3-text-dark-gray"><b> Description: {{ auction.description }}</b></h6>
                         <h6 class="w3-text-dark-gray"><b> Initial Price: {{ auction.start_price }}€</b></h6>
                         <span property="price" hidden>{{ auction.start_price }}</span>
                         <h6 class="w3-text-dark-gray"><b> Actual Price: {{ auction.actual_price }}€</b></h6>
