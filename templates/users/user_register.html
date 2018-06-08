@@ -3,6 +3,7 @@
 
 {% extends "base/leftBar.html" %} {% load staticfiles %}
 
+<span vocab="http://schema.org/" typeof="RegisterAction" hidden>
 
 {% block header %}
 
@@ -39,6 +40,7 @@
                             {% endfor %}
                           </p>
                         {% endfor %}
+                        <span property="target" hidden>Register form</span>
                          <button class="w3-margin w3-button w3-hover-green" type="submit" style="margin-top: 20px; background-color: #8fd08d; border-radius: 10px">
                             <label class="w3-text-gray"><i class="fas fa-user-plus"></i> Sign Up</label>
                         </button>

@@ -152,4 +152,4 @@ def add_star(request, pk):
                 friendship.get().friends.remove(user_obj)
 
     return HttpResponseRedirect("/users/users_list")
-  
+

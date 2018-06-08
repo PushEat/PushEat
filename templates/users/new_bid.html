@@ -28,6 +28,7 @@
 {% endblock %}
 
 {% block body %}
+<span hidden vocab="http://schema.org/" typeof="Offer">
 <div style="width: 75%; margin-left: 30px; margin-top: 30px; margin-bottom: 30px">
     <div class="w3-container" style="background-color: #90EE90">
         <h2 class="w3-text-black">New bid of {{ foodOffer.food.name }} auction</h2>
@@ -40,9 +41,11 @@
         <div class="container" style="border-radius: 5px">
             <label for="food"><i class="fa fa-lemon"></i><b> Food Auction</b></label>
             <input type="text" placeholder="Enter Food" id="food" name="food" value="{{ foodOffer.food.name }}" required style="width: 100%" disabled>
+            <span hidden property="name">{{ foodOffer.food.name }}</span>
             <br>
             <label for="price"><i class="fa fa-dollar"></i><b> Bid Amount (Actual Price: {{ foodOffer.actual_price }}€)</b></label>
             <input type="number" placeholder="Enter Bid $" id="price" name="price" required style="width: 100%">
+            <span hidden property="price">{{ foodOffer.actual_price }}</span>
             <label for="desc"><i class="fa fa-clock"></i><b> Auction Expiration Time:  {{ foodOffer.available_time }}</b></label>
             <button class="myButton" type="submit">
                 Add Bid <i class="fas fa-angle-right"></i>
@@ -53,4 +56,5 @@
 
     </div>
 </div>
+</span>
 {% endblock %}

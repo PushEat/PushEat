@@ -1,10 +1,13 @@
-{% extends "users/loggedin.html" %} {% load staticfiles %}
 <link rel="stylesheet" href='{% static "/css/style.css" %}'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-2.2.3.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+{% extends "users/loggedin.html" %} {% load staticfiles %}
+
+<span vocab="http://schema.org/" typeof="Offer" hidden>
 
 {% block header %}
 <header id="portfolio">
@@ -39,11 +42,14 @@
         <div class="container" style="border-radius: 5px">
             <label for="food"><i class="fa fa-lemon"></i><b> Food</b></label>
             <input type="text" placeholder="Enter Food" id="food" name="food" value="{{ food.name }}" required style="width: 100%" disabled>
+            <span property="additionalType" hidden>{{ auction.food.type }}</span>
             <br>
             <label for="price"><i class="fa fa-dollar"></i><b> Start Price</b></label>
             <input type="number" placeholder="Enter Starting Price $" id="price" name="price" required style="width: 100%">
+            <span property="price" hidden>{{ auction.start_price }}</span>
             <label for="desc"><i class="fa fa-comment"></i><b> Description</b></label>
             <input type="text" placeholder="Short description of the product" id="desc" name="desc" required style="width: 100%">
+            <span property="price" hidden>{{ auction.start_price }}</span>
             <label for="desc"><i class="fa fa-clock"></i><b> Expiration time</b></label>
             <input type="time" placeholder="Expiration time" id="time" name="time" required style="width: 100%">
             <button class="myButton" type="submit">
