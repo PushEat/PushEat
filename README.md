@@ -22,7 +22,10 @@ https://github.com/PushEat/PushEat/blob/master/heroku.md
 
 ![alt text](media/DatabaseDiagram.png)
 
-
+#### How to use behave testing tool
+Use the following command into your commandline(cmd):
+      *behave*
+    
 #### Superuser Credentials
       user: root
       password: 123password
