@@ -2,6 +2,8 @@
 
 {% extends "base/leftBar.html" %} {% load staticfiles %}
 
+<span vocab="http://schema.org/" typeof="ContactPage" hidden></span>
+
 {% block header %}
 
     <div class="w3-container" style="margin-top:80px" id="showcase">
@@ -17,14 +19,19 @@
             <div style="margin-top: 50px; margin-left: 40px">
                 <div class="w3-container w3-left" style="width: 25%">
                     <h6><b style="font-size: large">·Enterprise name:</b> PushEat S.A.</h6><br>
+                    <span property="name" hidden>PushEat S.A.</span>
                     <h6><b style="font-size: large">·Developer team:</b><br>
+                        <span property="producer" hidden>- Marcel Ortiz - Oscar Lopez - Gerard Donaire</span>
                         <li class="w3-ul" style="margin-left: 60px; margin-top: 5px">- Marcel Ortiz</li>
                         <li class="w3-ul" style="margin-left: 60px">- Oscar Lopez</li>
                         <li class="w3-ul" style="margin-left: 60px">- Gerard Donaire</li>
                     </h6><br>
                     <h6><b style="font-size: large">·Enterprise ubication:</b> C/Jaume II nº69 (Lleida)</h6><br>
+                    <span property="locationCreated" hidden> C/Jaume II nº69 (Lleida) </span>
                     <h6><b style="font-size: large">·University host:</b> Universitat de Lleida</h6><br>
-                    <h6><b style="font-size: large">·Email:</b> webprojectudl@gmail.com</h6><br>
+                    <span property="sponsor" hidden> Universitat de Lleida </span>
+                    <h6><b style="font-size: large">·Email:</b> webprojectudl@gmail.com </h6><br>
+                    <span property="mainEntity" hidden> webprojectudl@gmail.com </span>
                 </div>
 
                 <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>

@@ -2,6 +2,8 @@
 
 {% extends "base/leftBar.html" %} {% load staticfiles %}
 
+<span vocab="http://schema.org/" typeof="Offer" hidden>
+
 {% block header %}
 
     <div class="w3-container" style="margin-top:80px" id="showcase">
@@ -22,12 +24,17 @@
 
                     <header class="w3-container" style="background-color: #baee97; border-radius: 4px 4px 0 0">
                         <h3 class="w3-title w3-text-dark-gray"><b>{{ auction.food.type }}</b></h3>
+                        <span property="additionalType" hidden>{{ auction.food.type }}</span>
                     </header>
                     <div class="w3-container w3-white" style="border-radius: 4px; margin-top: 10px">
                         <h6 class="w3-text-dark-gray"><b> Food: {{ auction.food.name }}</b></h6>
+                        <span property="name" hidden>{{ auction.food.name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Auctioneer: {{ auction.owner.first_name }}</b></h6>
+                        <span typeof="Person" property="offeredBy" hidden>{{ auction.owner.first_name }}</span>
                         <h6 class="w3-text-dark-gray"><b> Initial Price: {{ auction.start_price }}€</b></h6>
-                        <h6 class="w3-text-dark-gray"><b> Actual Price: {{ auction.actual_price }}€</b></h6>
+                        <span property="price" hidden>{{ auction.start_price }}</span>
+                        <h6 class="w3-text-dark-gray" hidden><b> Actual Price: {{ auction.actual_price }}€</b></h6>
+                        <span property="price" hidden>{{ auction.actual_price }}</span>
                         <button class="w3-right w3-margin" style="border-radius: 4px" onclick="document.getElementById('id01').style.display='block'">Push <i class="fas fa-angle-right"></i></button>
                     </div>
                 </div>
@@ -39,30 +46,30 @@
 
     <!-- The Modal -->
     <div id="id01" class="modal" style="z-index: 100">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
-      <!-- Modal Content -->
-      <form class="modal-content animate" action="/users/auth/" method="POST"> {% csrf_token %}
-        <div class="imgcontainer">
-          <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
-        </div>
+          <!-- Modal Content -->
+          <form class="modal-content animate" action="/users/auth/" method="POST"> {% csrf_token %}
+            <div class="imgcontainer">
+              <img class="w3-padding w3-margin" src="{% static 'img/logo.png' %}" alt="">
+            </div>
 
-        <div class="container">
-            <label for="uname"><i class="fa fa-user"></i><b> Username</b></label>
-          <input type="text" placeholder="Enter Username" id="username" name="username" required style="width: 100%">
-            <br>
-          <label for="psw"><i class="fa fa-key"></i><b> Password</b></label>
-          <input type="password" placeholder="Enter Password" id="password" name="password" required style="width: 100%">
+            <div class="container">
+                <label for="uname"><i class="fa fa-user"></i><b> Username</b></label>
+              <input type="text" placeholder="Enter Username" id="username" name="username" required style="width: 100%">
+                <br>
+              <label for="psw"><i class="fa fa-key"></i><b> Password</b></label>
+              <input type="password" placeholder="Enter Password" id="password" name="password" required style="width: 100%">
 
-            <button class="myButton" type="submit">
-                Login <i class="fas fa-angle-right"></i>
-            </button>
-        </div>
+                <button class="myButton" type="submit">
+                    Login <i class="fas fa-angle-right"></i>
+                </button>
+            </div>
 
-        <div class="container" style="background-color:#f1f1f1">
-          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-          <span class="psw">Don't have an account? <a style="text-decoration: underline" href="#">Register</a></span>
-        </div>
+            <div class="container" style="background-color:#f1f1f1">
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <span class="psw">Don't have an account? <a style="text-decoration: underline" href="#">Register</a></span>
+            </div>
 
       </form>
     </div>
